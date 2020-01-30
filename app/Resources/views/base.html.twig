@@ -1,13 +1,673 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+<html lang="zxx">
+
+
+<!-- Mirrored from thememarch.com/demo/html/malic/malic/login-register.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 26 Jan 2020 19:44:34 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Malic - Fishing & Hunting Club HTML Template</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" href="{{ asset('Front/') }}assets/images/favicon.png">
+    <link rel="shortcut icon" href="{{ asset('Front/') }}assets/images/favicon.ico">
+
+    <!-- CSS FILES HERE -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="{{ asset('Front/') }}assets/css/vendors/plugins.min.css">
+    <link rel="stylesheet" href="{{ asset('Front/') }}assets/css/style.css">
+    <!-- endinject -->
+</head>
+
+<body>
+
+<!-- Preloader -->
+<div class="tm-preloader">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="tm-preloader-logo">
+                    <img src="{{ asset('Front/') }}assets/images/logo-white.png" alt="logo">
+                </div>
+                <span class="tm-preloader-progress"></span>
+            </div>
+        </div>
+    </div>
+    <button class="tm-button tm-button-small">Cancel Preloader</button>
+</div>
+<!--// Preloader -->
+
+<!-- Wrapper -->
+<div id="wrapper" class="wrapper">
+
+    <!-- Header -->
+    <div class="tm-header tm-header-sticky">
+
+        <div class="tm-header-toparea">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-8 col-12">
+                        <ul class="tm-header-info">
+                            <li>FREE shipping over $50 </li>
+                            <li><a href="tel:18883456789"><i class="ion-ios-telephone"></i>1-888-345-6789</a></li>
+                            <li><a href="mailto:contact@example.com"><i
+                                            class="ion-android-mail"></i>contact@example.com</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-4 col-12">
+                        <ul class="tm-header-icons">
+                            {% if app.user %}
+                                <li><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>
+
+                            {% else %}
+                                <li><a href="{{ path('fos_user_security_login') }}">Log In / Register</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tm-header-bottomarea">
+            <div class="container">
+                <div class="tm-header-inner">
+                    <a href="index.html" class="tm-header-logo">
+                        <img src="{{ asset('Front/') }}assets/images/logo.png" alt="malic">
+                    </a>
+                    <nav class="tm-header-nav">
+                        <ul>
+                            <li><a href="{{path('homepage')}}">Home</a></li>
+                            <li><a href="about.html">About</a></li>
+                            <li><a href="services.html">Service</a></li>
+                            <li class="tm-header-nav-dropdown"><a href="#">Shop</a>
+                                <ul>
+                                    <li><a href="{{path('shop_homepage')}}">Our Products</a></li>
+                                    {% if app.user %}
+                                    <li><a href="{{path('shop_add')}}">Add Product</a></li>
+                                    <li><a href="portfolios.html">My Products</a></li>
+                                    {% endif %}
+                                </ul>
+                            </li>
+                            <li class="tm-header-nav-dropdown"><a href="blog.html">Blog</a>
+                                <ul>
+                                    <li><a href="blog.html">Blog</a></li>
+                                    <li><a href="blog-2.html">Blog Style 2</a></li>
+                                    <li><a href="blog-leftsidebar.html">Blog Left Sidebar</a></li>
+                                    <li><a href="blog-nosidebar.html">Blog Without Sidebar</a></li>
+                                    <li><a href="blog-details.html">Blog Details</a></li>
+                                    <li><a href="blog-details-leftsidebar.html">Blog Details Left Sidebar</a></li>
+                                    <li><a href="blog-details-nosidebar.html">Blog Details Without Sidebar</a></li>
+                                    <li><a href="blog-details-gallery.html">Blog Details Gallery</a></li>
+                                    <li><a href="blog-details-audio.html">Blog Details Audio</a></li>
+                                    <li><a href="blog-details-video.html">Blog Details Video</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="{{path('contact')}}">Contact</a></li>
+                        </ul>
+                    </nav>
+                    <ul class="tm-header-utils">
+                        <li>
+                            <button class="tm-header-searchtrigger"><i class="ion-android-search"></i></button>
+                            <form class="tm-header-searchform" action="#">
+                                <input type="text" placeholder="Search">
+                                <button type="submit"><i class="ion-android-search"></i></button>
+                            </form>
+                        </li>
+                        <li><a href="cart.html"><i class="ion-android-cart"></i></a></li>
+                    </ul>
+                    <div class="tm-mobilenav"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--// Header -->
+
+{% block content%}
+
+ {% endblock %}
+    <!--// Page Content -->
+
+    <!-- Footer -->
+    <div class="tm-footer">
+        <div class="tm-footer-toparea tm-padding-section" data-bgimage="assets/images/footer-area-bg.jpg"
+             data-black-overlay="9">
+            <div class="container">
+                <div class="widgets widgets-footer row">
+
+                    <!-- Single Widget -->
+                    <div class="col-lg-3 col-md-6 col-12">
+                        <div class="single-widget widget-info">
+                            <a class="widget-info-logo" href="index.html"><img src="assets/images/logo-white.png"
+                                                                               alt="white logo"></a>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sagittis orci ac
+                                odio dictum tincidunt. Donec ut metus leo auctor id faucibus.</p>
+                            <ul>
+                                <li><a href="#"><i class="ion-social-facebook"></i></a></li>
+                                <li><a href="#"><i class="ion-social-instagram-outline"></i></a></li>
+                                <li><a href="#"><i class="ion-social-skype-outline"></i></a></li>
+                                <li><a href="#"><i class="ion-social-pinterest-outline"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--// Single Widget -->
+
+                    <!-- Single Widget -->
+                    <div class="col-lg-3 col-md-6 col-12">
+                        <div class="single-widget widget-contact">
+                            <h6 class="widget-title">Contact Us</h6>
+                            <ul>
+                                <li>
+                                    <i class="ion-ios-telephone-outline"></i>
+                                    <p><a href="tel:+18009156270">1 (800) 915 6270</a></p>
+                                    <p><a href="tel:+18009156271">1 (800) 915 6271</a></p>
+                                </li>
+                                <li>
+                                    <i class="ion-ios-email-outline"></i>
+                                    <p><a href="mailto:">support@malicfishing.com</a></p>
+                                    <p><a href="#:">Skype: malicfishing</a></p>
+                                </li>
+                                <li>
+                                    <i class="ion-ios-location-outline"></i>
+                                    <p>2726 Avenue Papineau Montreal, QC, Canada</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--// Single Widget -->
+
+                    <!-- Single Widget -->
+                    <div class="col-lg-3 col-md-6 col-12">
+                        <div class="single-widget widget-twitterfeed">
+                            <h6 class="widget-title">Twitter</h6>
+                            <ul>
+                                <li>
+                                    <h6><a href="#"><i class="ion-social-twitter-outline"></i> A fishing vessel
+                                            is a boat or ship used to catch fish in the
+                                            sea.</a></h6>
+                                    <span>3 hours ago</span>
+                                </li>
+                                <li>
+                                    <h6><a href="#"><i class="ion-social-twitter-outline"></i> A fishing vessel
+                                            is a boat or ship used to catch fish in the
+                                            sea.</a></h6>
+                                    <span>5 days ago</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--// Single Widget -->
+
+                    <!-- Single Widget -->
+                    <div class="col-lg-3 col-md-6 col-12">
+                        <div class="single-widget widget-instagram">
+                            <h6 class="widget-title">Instagram</h6>
+                            <ul id="instafeed" class="widget-instagram-photos"></ul>
+                        </div>
+                    </div>
+                    <!--// Single Widget -->
+
+                </div>
+            </div>
+        </div>
+
+        <div class="tm-footer-bottomarea bg-dark">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-7">
+                        <p class="tm-footer-copyright">Powered By <a href="https://thememarch.com/">ThemeMarch</a> ©
+                            2019</p>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="tm-footer-payment">
+                            <img src="assets/images/payment-methods.png" alt="payment methods">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--// Footer -->
+
+    <!-- Product Quickview -->
+    <div class="tm-product-quickview" id="tm-product-quickview">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-9 col-lg-10 col-12">
+                    <div class="tm-product-quickview-inner">
+                        <!-- Product Details -->
+                        <div class="tm-prodetails">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-12">
+                                    <div class="tm-prodetails-images">
+                                        <div class="tm-prodetails-largeimages">
+                                            <div class="tm-prodetails-largeimage">
+                                                <img src="assets/images/products/product-image-1.jpg"
+                                                     alt="product image">
+                                            </div>
+                                            <div class="tm-prodetails-largeimage">
+                                                <img src="assets/images/products/product-image-2.jpg"
+                                                     alt="product image">
+                                            </div>
+                                            <div class="tm-prodetails-largeimage">
+                                                <img src="assets/images/products/product-image-3.jpg"
+                                                     alt="product image">
+                                            </div>
+                                            <div class="tm-prodetails-largeimage">
+                                                <img src="assets/images/products/product-image-1.jpg"
+                                                     alt="product image">
+                                            </div>
+                                            <div class="tm-prodetails-largeimage">
+                                                <img src="assets/images/products/product-image-2.jpg"
+                                                     alt="product image">
+                                            </div>
+                                            <div class="tm-prodetails-largeimage">
+                                                <img src="assets/images/products/product-image-3.jpg"
+                                                     alt="product image">
+                                            </div>
+                                        </div>
+                                        <div class="tm-prodetails-thumbnails">
+                                            <div class="tm-prodetails-thumbnail">
+                                                <img src="assets/images/products/product-image-thumb-1.jpg"
+                                                     alt="product image">
+                                            </div>
+                                            <div class="tm-prodetails-thumbnail">
+                                                <img src="assets/images/products/product-image-thumb-2.jpg"
+                                                     alt="product image">
+                                            </div>
+                                            <div class="tm-prodetails-thumbnail">
+                                                <img src="assets/images/products/product-image-thumb-3.jpg"
+                                                     alt="product image">
+                                            </div>
+                                            <div class="tm-prodetails-thumbnail">
+                                                <img src="assets/images/products/product-image-thumb-1.jpg"
+                                                     alt="product image">
+                                            </div>
+                                            <div class="tm-prodetails-thumbnail">
+                                                <img src="assets/images/products/product-image-thumb-2.jpg"
+                                                     alt="product image">
+                                            </div>
+                                            <div class="tm-prodetails-thumbnail">
+                                                <img src="assets/images/products/product-image-thumb-3.jpg"
+                                                     alt="product image">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6 col-12">
+                                    <div class="tm-prodetails-content">
+                                        <h4 class="tm-prodetails-title">Fishing Reel</h4>
+                                        <div class="tm-ratingbox">
+                                            <span class="is-active"><i class="ion-android-star"></i></span>
+                                            <span class="is-active"><i class="ion-android-star"></i></span>
+                                            <span class="is-active"><i class="ion-android-star"></i></span>
+                                            <span class="is-active"><i class="ion-android-star"></i></span>
+                                            <span><i class="ion-android-star"></i></span>
+                                        </div>
+                                        <div class="tm-prodetails-price">
+                                            <span><del>$75.99</del> $59.99</span>
+                                        </div>
+                                        <ul class="tm-prodetails-infos">
+                                            <li>Catagory: <a href="shop.html">Fishing equipments</a></li>
+                                            <li>Tags: <a href="shop.html">fishing woobler</a>, <a
+                                                        href="shop.html">fising hook</a>, <a href="shop.html">fishing
+                                                    reels</a></li>
+                                            <li>Product ID: 100</li>
+                                            <li>Available: <span class="color-theme">In stock</span></li>
+                                        </ul>
+                                        <div class="tm-prodetails-paras">
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque mi
+                                                dolor, malesuada id metus a, mattis eleifend elit. Nullam pharetra
+                                                consequat ex in dapibus. Vestibulum ante ipsum primis in faucibus
+                                                orciluctus et ultrices posuere cubilia Curae.</p>
+                                        </div>
+                                        <div class="tm-prodetails-quantitycart">
+                                            <div class="tm-quantitybox">
+                                                <input type="text" value="1">
+                                            </div>
+                                            <a href="#" class="tm-button tm-button-dark">Add To Cart</a>
+                                        </div>
+
+                                        <div class="tm-prodetails-share">
+                                            <h6>Share :</h6>
+                                            <ul>
+                                                <li><a href="#"><i class="ion-social-facebook"></i></a></li>
+                                                <li><a href="#"><i class="ion-social-instagram-outline"></i></a>
+                                                </li>
+                                                <li><a href="#"><i class="ion-social-skype-outline"></i></a></li>
+                                                <li><a href="#"><i class="ion-social-pinterest-outline"></i></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--// Product Details -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--// Product Quickview -->
+
+    <button id="back-top-top"><i class="ion-arrow-up-c"></i></button>
+
+</div>
+<!--// Wrapper -->
+
+<!-- JS FILES HERE -->
+<!-- inject:js -->
+<script src="{{ asset('Front/') }}assets/js/vendors/plugins.min.js"></script>
+<script src="{{ asset('Front/') }}assets/js/main.js"></script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBEDd_Sv9-p-I6bebrAMpmZBQvalqBE5Ds"></script>
+<script src="{{ asset('Front/') }}assets/js/mapjs/google-map.js"></script>
+
+<!-- endinject -->
+</body>
+
+
+<!-- Mirrored from thememarch.com/demo/html/malic/malic/login-register.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 26 Jan 2020 19:44:35 GMT -->
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{#<!doctype html>#}
+{#<html class="no-js" lang="en">#}
+{#<meta http-equiv="content-type" content="text/html;charset=utf-8"/>#}
+{#<head>#}
+{#    <meta charset="utf-8">#}
+{#    <meta http-equiv="x-ua-compatible" content="ie=edge">#}
+{#    <meta name="viewport" content="width=device-width, initial-scale=1">#}
+
+{#    <!--Theme Title-->#}
+{#    <title>Weapon Store - Gun Shop HTML Template</title>#}
+{#    <meta name="description" content="">#}
+
+{#    <!-- Place favicon.ico in the root directory -->#}
+{#    <link rel="shortcut icon" type="image/icon" href="{{ asset('Front/') }}favicon.png"/>#}
+
+{#    <!-- All css Here -->#}
+{#    <!-- All plugins css -->#}
+{#    <link rel="stylesheet" href="{{ asset('Front/') }}assets/css/allplugins.css">#}
+{#    <!-- Style css -->#}
+{#    <link rel="stylesheet" href="{{ asset('Front/') }}assets/style.css">#}
+{#    <!-- Responsive css -->#}
+{#    <link rel="stylesheet" href="{{ asset('Front/') }}assets/css/responsive.css">#}
+
+{#    <!-- Customization css -->#}
+{#    <!--If u need any change then use this css file-->#}
+{#    <link rel="stylesheet" href="{{ asset('Front/') }}assets/css/custom.css">#}
+
+{#    <!-- Modernizr JavaScript -->#}
+{#    <script src="{{ asset('Front/') }}assets/js/vendor/modernizr-2.8.3.min.js"></script>#}
+
+{#    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->#}
+{#    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->#}
+{#    <!--[if lt IE 9]>#}
+{#    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>#}
+{#    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>#}
+{#    <![endif]-->#}
+{#</head>#}
+
+{#<body>#}
+
+{#<header>#}
+
+{#    <div class="container-fluid">#}
+{#        <div class="row">#}
+{#            <div class="col-md-2 col-sm-2 col-xs-12">#}
+{#                <div class="logo-area">#}
+{#                    <a href="index-2.html"><img src="{{ asset('Front/') }}assets/images/logo/logo.png" alt=""/></a>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="col-md-10 col-sm-10 hidden-xs">#}
+{#                <div class="main-header">#}
+{#                    <div class="main-menus">#}
+{#                        <nav>#}
+{#                            <ul class="mamnu">#}
+{#                                <li><a href="index-2.html">Home</a></li>#}
+{#                                <li><a href="about.html">About</a></li>#}
+{#                                <li><a href="services.html">services</a></li>#}
+{#                                <li>#}
+{#                                    <a href="#">pages</a>#}
+{#                                    <ul>#}
+{#                                        <li><a href="about.html">about</a></li>#}
+{#                                        <li><a href="shop.html">shop</a></li>#}
+{#                                        <li><a href="product-single.html">shop single</a></li>#}
+{#                                        <li><a href="event.html">event</a></li>#}
+{#                                        <li><a href="event-single.html">event-single</a></li>#}
+{#                                        <li><a href="gallery.html">gallery</a></li>#}
+{#                                        <li><a href="blog.html">blog</a></li>#}
+{#                                        <li><a href="blog-single.html">blog single</a></li>#}
+{#                                        <li><a href="contact.html">contact</a></li>#}
+
+{#                                    </ul>#}
+{#                                </li>#}
+{#                                <li>#}
+{#                                    <a href="#">shop</a>#}
+{#                                    <ul>#}
+{#                                        <li><a href="shop.html">shop page</a></li>#}
+{#                                        <li><a href="product-single.html">shop single</a></li>#}
+
+{#                                    </ul>#}
+{#                                </li>#}
+{#                                <li>#}
+{#                                    <a href="#">blog</a>#}
+{#                                    <ul>#}
+{#                                        <li><a href="blog.html">blog page</a></li>#}
+{#                                        <li><a href="blog-single.html">blog single</a></li>#}
+{#                                    </ul>#}
+{#                                </li>#}
+{#                                <li><a href="contact.html">Contact</a></li>#}
+{#                            </ul>#}
+{#                        </nav>#}
+{#                    </div>#}
+{#                    <div class="serach-header">#}
+{#                        <button class="searchd"><i class="fas fa-search"></i></button>#}
+{#                        <div class="searchbox">#}
+{#                            <button class="close">×</button>#}
+{#                            <form>#}
+{#                                <input type="search" placeholder="Search …">#}
+{#                                <button type="submit"><i class="fas fa-search"></i></button>#}
+{#                            </form>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div class="cart-head">#}
+{#                        <button><i class="fas fa-shopping-cart"></i></button>#}
+{#                        <div class="nav-shop-cart">#}
+{#                            <div class="widget_shopping_cart_content">#}
+{#                                <ul class="product_list_widget ">#}
+{#                                    <li class="mini_cart_item">#}
+
+{#                                        <a href="#">#}
+{#                                            <img src="{{ asset('Front/') }}assets/images/products/5.jpg" alt=""/>#}
+{#                                            <p class="product-name">Shop Item 01</p>#}
+{#                                        </a>#}
+
+{#                                        <p class="quantity">1 x#}
+{#                                            <strong class="Price-amount">$200.00</strong>#}
+{#                                        </p>#}
+
+{#                                        <a href="#" class="remove" title="Remove this item">x</a>#}
+{#                                    </li>#}
+{#                                    <li class="mini_cart_item">#}
+
+{#                                        <a href="#">#}
+{#                                            <img src="{{ asset('Front/') }}assets/images/products/6.jpg" alt=""/>#}
+{#                                            <p class="product-name">Shop Item 01</p>#}
+{#                                        </a>#}
+
+{#                                        <p class="quantity">1 x#}
+{#                                            <strong class="Price-amount">$200.00</strong>#}
+{#                                        </p>#}
+
+{#                                        <a href="#" class="remove" title="Remove this item">x</a>#}
+{#                                    </li>#}
+{#                                    <li class="mini_cart_item">#}
+
+{#                                        <a href="#">#}
+{#                                            <img src="{{ asset('Front/') }}assets/images/products/7.jpg" alt=""/>#}
+{#                                            <p class="product-name">Shop Item 01</p>#}
+{#                                        </a>#}
+
+{#                                        <p class="quantity">1 x#}
+{#                                            <strong class="Price-amount">$200.00</strong>#}
+{#                                        </p>#}
+
+{#                                        <a href="#" class="remove" title="Remove this item">x</a>#}
+{#                                    </li>#}
+{#                                </ul>#}
+{#                                <!-- /.product_list_widget -->#}
+
+{#                                <p class="total">#}
+{#                                    <strong>Subtotal:</strong>#}
+{#                                    <span class="amount">$300.00#}
+{#                                                </span>#}
+{#                                </p>#}
+
+{#                                <p class="buttons">#}
+{#                                    <a href="#" class="btn1">View Cart</a>#}
+{#                                    <a href="#" class="btn2">Checkout</a>#}
+{#                                </p>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div class="sing-in-btn">#}
+{#                        <a href="login.html" class="btn1">Sign in</a>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#    <div class="mobilemenu">#}
+{#        <div class="mobile-menu visible-xs">#}
+{#            <nav>#}
+{#                <ul>#}
+{#                    <li><a href="index-2.html">Home</a></li>#}
+{#                    <li><a href="about.html">About</a></li>#}
+{#                    <li><a href="services.html">services</a></li>#}
+{#                    <li>#}
+{#                        <a href="javascript:void(0)">pages</a>#}
+{#                        <ul>#}
+{#                            <li><a href="about.html">about</a></li>#}
+{#                            <li><a href="shop.html">shop</a></li>#}
+{#                            <li><a href="product-single.html">shop single</a></li>#}
+{#                            <li><a href="event.html">event</a></li>#}
+{#                            <li><a href="event-single.html">event-single</a></li>#}
+{#                            <li><a href="gallery.html">gallery</a></li>#}
+{#                            <li><a href="blog.html">blog</a></li>#}
+{#                            <li><a href="blog-single.html">blog single</a></li>#}
+{#                            <li><a href="contact.html">contact</a></li>#}
+{#                        </ul>#}
+{#                    </li>#}
+{#                    <li>#}
+{#                        <a href="#">shop</a>#}
+{#                        <ul>#}
+{#                            <li><a href="shop.html">shop page</a></li>#}
+{#                            <li><a href="product-single.html">shop single</a></li>#}
+
+{#                        </ul>#}
+{#                    </li>#}
+{#                    <li>#}
+{#                        <a href="#">blog</a>#}
+{#                        <ul>#}
+{#                            <li><a href="blog.html">blog page</a></li>#}
+{#                            <li><a href="blog-single.html">blog single</a></li>#}
+{#                        </ul>#}
+{#                    </li>#}
+{#                    <li><a href="contact.html">Contact</a></li>#}
+{#                </ul>#}
+{#            </nav>#}
+{#        </div>#}
+{#    </div>#}
+{#</header>#}
+{#{% block content %}#}
+
+{#{% endblock %}#}
+{#<footer class="jarallax">#}
+{#    <div class="footer-top section">#}
+{#        <div class="container">#}
+{#            <div class="row">#}
+{#                <div class="col-md-4 col-sm-6">#}
+{#                    <div class="foo-about">#}
+{#                        <ul class="foo-social">#}
+{#                            <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>#}
+{#                            <li><a href="#"><i class="fab fa-twitter"></i></a></li>#}
+{#                            <li><a href="#"><i class="fab fa-youtube"></i></a></li>#}
+{#                            <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>#}
+{#                        </ul>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#    <div class="footer-bottom">#}
+{#        <div class="container">#}
+{#            <div class="row">#}
+{#                <div class="col-md-6 col-sm-12">#}
+{#                    <div class="copyright sm-t-center">#}
+{#                        <p>Copyright © 2018 <a href="#"><span>Weapon</span> </a>Store. Design by <a href="#"><span>Webstrot</span></a>#}
+{#                        </p>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="col-md-6 col-sm-12">#}
+{#                    <div class="foo-links sm-t-center">#}
+{#                        <ul>#}
+{#                            <li><a href="#">Privacy Policy</a></li>#}
+{#                            <li><a href="#">Terms & Conditions</a></li>#}
+{#                            <li><a href="#">Copyright Policy</a></li>#}
+{#                        </ul>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</footer>#}
+{#<script src="{{ asset('Front/') }}assets/js/vendor/jquery-3.2.1.min.js"></script>#}
+{#<script src="{{ asset('Front/') }}assets/js/tether.min.js"></script>#}
+{#<script src="{{ asset('Front/') }}assets/js/bootstrap.min.js"></script>#}
+{#<script src="{{ asset('Front/') }}assets/js/owl.carousel.min.js"></script>#}
+{#<script src="{{ asset('Front/') }}assets/js/jquery.bxslider.min.js"></script>#}
+{#<script src="{{ asset('Front/') }}assets/js/isotope.pkgd.min.js"></script>#}
+{#<script src="{{ asset('Front/') }}assets/js/jquery.magnific-popup.min.js"></script>#}
+{#<script src="{{ asset('Front/') }}assets/js/jquery.meanmenu.js"></script>#}
+{#<script src="{{ asset('Front/') }}assets/js/jarallax.min.js"></script>#}
+{#<script src="{{ asset('Front/') }}assets/js/jquery-ui.min.js"></script>#}
+{#<script src="{{ asset('Front/') }}assets/js/jquery.waypoints.min.js"></script>#}
+{#<script src="{{ asset('Front/') }}assets/js/jquery.counterup.min.js"></script>#}
+{#<script src="{{ asset('Front/') }}assets/js/masonry.pkgd.min.js"></script>#}
+{#<script src="{{ asset('Front/') }}assets/js/jquery.bootstrap-touchspin.min.js"></script>#}
+{#<script src="{{ asset('Front/') }}assets/js/jquery.downCount.js"></script>#}
+{#<script src="{{ asset('Front/') }}assets/js/wow.min.js"></script>#}
+{#<script src="{{ asset('Front/') }}assets/js/slick.min.js"></script>#}
+{#<script src="{{ asset('Front/') }}assets/js/plugins.js"></script>#}
+{#<script src="{{ asset('Front/') }}assets/js/main.js"></script>#}
+
+{#</body>#}
+{#</html>#}

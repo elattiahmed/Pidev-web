@@ -1,3 +1,11 @@
+admin:
+    resource: "@AdminBundle/Resources/config/routing.yml"
+    prefix:   /Admin
+
+shop:
+    resource: "@ShopBundle/Resources/config/routing.yml"
+    prefix:   /Shop
+
 app:
     resource: '@AppBundle/Controller/'
     type: annotation
