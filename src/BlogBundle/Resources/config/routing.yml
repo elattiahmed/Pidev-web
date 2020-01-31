@@ -1,0 +1,6 @@
+blog_homepage:
+    path:     /
+    defaults: { _controller: BlogBundle:Default:index }
+blog_show:
+    path:     /Details/{id}
+    defaults: { _controller: BlogBundle:Default:show }
