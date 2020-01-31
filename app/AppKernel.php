@@ -21,6 +21,9 @@ class AppKernel extends Kernel
             new ShopBundle\ShopBundle(),
             new AdminBundle\AdminBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new BlogBundle\BlogBundle(),
+            new Vich\UploaderBundle\VichUploaderBundle(),
+            new FOS\CKEditorBundle\FOSCKEditorBundle(),
 
         ];
 

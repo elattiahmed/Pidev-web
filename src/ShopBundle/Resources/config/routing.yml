@@ -1,0 +1,11 @@
+shop_homepage:
+    path:     /
+    defaults: { _controller: ShopBundle:Default:index }
+
+shop_add:
+    path:     /add
+    defaults: { _controller: ShopBundle:Default:add }
+
+shop_details:
+    path:     /details/{id}
+    defaults: { _controller: ShopBundle:Default:details }

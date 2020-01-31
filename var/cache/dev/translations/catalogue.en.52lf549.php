@@ -207,6 +207,11 @@ the Team.
     'label_previous' => 'Previous',
     'label_next' => 'Next',
   ),
+  'VichUploaderBundle' => 
+  array (
+    'download' => 'Download',
+    'form.label.delete' => 'Delete?',
+  ),
 ));
 
 

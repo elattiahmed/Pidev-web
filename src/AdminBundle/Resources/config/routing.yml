@@ -1,0 +1,9 @@
+admin_homepage:
+    path:     /
+    defaults: { _controller: AdminBundle:Default:index }
+blog_new:
+    path:     /blog/new
+    defaults: { _controller: BlogBundle:Default:new }
+blog_delete:
+    path:     /Delete/{id}
+    defaults: { _controller: BlogBundle:Default:delete }
