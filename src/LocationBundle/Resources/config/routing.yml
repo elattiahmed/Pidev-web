@@ -1,0 +1,18 @@
+location_homepage:
+    path:     /
+    defaults: { _controller: LocationBundle:Default:index }
+location_add:
+    path:     /add
+    defaults: { _controller: LocationBundle:Default:add }
+
+createContract:
+    path:     /addContract/{id}
+    defaults: { _controller: LocationBundle:Default:louer }
+
+deleteLocation:
+    path:     /deleteLocation/{id}
+    defaults: { _controller: LocationBundle:Default:delete }
+
+editLocation:
+    path:     /editLocation/{id}
+    defaults: { _controller: LocationBundle:Default:edit }
