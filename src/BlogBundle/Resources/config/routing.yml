@@ -4,3 +4,6 @@ blog_homepage:
 blog_show:
     path:     /Details/{id}
     defaults: { _controller: BlogBundle:Default:show }
+recherche_blog:
+    path:     /searchblog
+    defaults: { _controller: BlogBundle:Default:RechercheBlog }

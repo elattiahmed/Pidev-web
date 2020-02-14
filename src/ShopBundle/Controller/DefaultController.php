@@ -113,7 +113,7 @@ class DefaultController extends Controller
         $pagination = $paginator->paginate(
             $products,
             $request->query->getInt('page', 1)/*page number*/,
-            3/*limit per page*/
+            6/*limit per page*/
         );
         return $this->render('ShopBundle:Default:index.html.twig',['products' => $pagination]);
     }

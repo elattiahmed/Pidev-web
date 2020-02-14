@@ -107,6 +107,112 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
 
         }
 
+        elseif (0 === strpos($pathinfo, '/lo')) {
+            if (0 === strpos($pathinfo, '/location')) {
+                // location_homepage
+                if ('/location' === $trimmedPathinfo) {
+                    $ret = array (  '_controller' => 'LocationBundle\\Controller\\DefaultController::indexAction',  '_route' => 'location_homepage',);
+                    if ('/' === substr($pathinfo, -1)) {
+                        // no-op
+                    } elseif ('GET' !== $canonicalMethod) {
+                        goto not_location_homepage;
+                    } else {
+                        return array_replace($ret, $this->redirect($rawPathinfo.'/', 'location_homepage'));
+                    }
+
+                    return $ret;
+                }
+                not_location_homepage:
+
+                if (0 === strpos($pathinfo, '/location/add')) {
+                    // location_add
+                    if ('/location/add' === $pathinfo) {
+                        return array (  '_controller' => 'LocationBundle\\Controller\\DefaultController::addAction',  '_route' => 'location_add',);
+                    }
+
+                    // createContract
+                    if (0 === strpos($pathinfo, '/location/addContract') && preg_match('#^/location/addContract/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, ['_route' => 'createContract']), array (  '_controller' => 'LocationBundle\\Controller\\DefaultController::louerAction',));
+                    }
+
+                }
+
+                // deleteLocation
+                if (0 === strpos($pathinfo, '/location/deleteLocation') && preg_match('#^/location/deleteLocation/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, ['_route' => 'deleteLocation']), array (  '_controller' => 'LocationBundle\\Controller\\DefaultController::deleteAction',));
+                }
+
+                // editLocation
+                if (0 === strpos($pathinfo, '/location/editLocation') && preg_match('#^/location/editLocation/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, ['_route' => 'editLocation']), array (  '_controller' => 'LocationBundle\\Controller\\DefaultController::editAction',));
+                }
+
+            }
+
+            elseif (0 === strpos($pathinfo, '/login')) {
+                // fos_user_security_login
+                if ('/login' === $pathinfo) {
+                    $ret = array (  '_controller' => 'fos_user.security.controller:loginAction',  '_route' => 'fos_user_security_login',);
+                    if (!in_array($canonicalMethod, ['GET', 'POST'])) {
+                        $allow = array_merge($allow, ['GET', 'POST']);
+                        goto not_fos_user_security_login;
+                    }
+
+                    return $ret;
+                }
+                not_fos_user_security_login:
+
+                // fos_user_security_check
+                if ('/login_check' === $pathinfo) {
+                    $ret = array (  '_controller' => 'fos_user.security.controller:checkAction',  '_route' => 'fos_user_security_check',);
+                    if (!in_array($requestMethod, ['POST'])) {
+                        $allow = array_merge($allow, ['POST']);
+                        goto not_fos_user_security_check;
+                    }
+
+                    return $ret;
+                }
+                not_fos_user_security_check:
+
+            }
+
+            // fos_user_security_logout
+            if ('/logout' === $pathinfo) {
+                $ret = array (  '_controller' => 'fos_user.security.controller:logoutAction',  '_route' => 'fos_user_security_logout',);
+                if (!in_array($canonicalMethod, ['GET', 'POST'])) {
+                    $allow = array_merge($allow, ['GET', 'POST']);
+                    goto not_fos_user_security_logout;
+                }
+
+                return $ret;
+            }
+            not_fos_user_security_logout:
+
+        }
+
+        elseif (0 === strpos($pathinfo, '/contact')) {
+            // contacus_homepage
+            if ('/contact' === $trimmedPathinfo) {
+                $ret = array (  '_controller' => 'ContacusBundle\\Controller\\DefaultController::indexAction',  '_route' => 'contacus_homepage',);
+                if ('/' === substr($pathinfo, -1)) {
+                    // no-op
+                } elseif ('GET' !== $canonicalMethod) {
+                    goto not_contacus_homepage;
+                } else {
+                    return array_replace($ret, $this->redirect($rawPathinfo.'/', 'contacus_homepage'));
+                }
+
+                return $ret;
+            }
+            not_contacus_homepage:
+
+            // contact
+            if ('/contact' === $pathinfo) {
+                return array (  '_controller' => 'AppBundle\\Controller\\DefaultController::contactAction',  '_route' => 'contact',);
+            }
+
+        }
+
         elseif (0 === strpos($pathinfo, '/Admin')) {
             // admin_homepage
             if ('/Admin' === $trimmedPathinfo) {
@@ -161,6 +267,11 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
                 return $this->mergeDefaults(array_replace($matches, ['_route' => 'shop_details']), array (  '_controller' => 'ShopBundle\\Controller\\DefaultController::detailsAction',));
             }
 
+            // shop_addtopanier
+            if (0 === strpos($pathinfo, '/Shop/panier') && preg_match('#^/Shop/panier/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, ['_route' => 'shop_addtopanier']), array (  '_controller' => 'ShopBundle\\Controller\\PanierController::addToPanierAction',));
+            }
+
         }
 
         // homepage
@@ -177,50 +288,6 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
             return $ret;
         }
         not_homepage:
-
-        // contact
-        if ('/contact' === $pathinfo) {
-            return array (  '_controller' => 'AppBundle\\Controller\\DefaultController::contactAction',  '_route' => 'contact',);
-        }
-
-        if (0 === strpos($pathinfo, '/login')) {
-            // fos_user_security_login
-            if ('/login' === $pathinfo) {
-                $ret = array (  '_controller' => 'fos_user.security.controller:loginAction',  '_route' => 'fos_user_security_login',);
-                if (!in_array($canonicalMethod, ['GET', 'POST'])) {
-                    $allow = array_merge($allow, ['GET', 'POST']);
-                    goto not_fos_user_security_login;
-                }
-
-                return $ret;
-            }
-            not_fos_user_security_login:
-
-            // fos_user_security_check
-            if ('/login_check' === $pathinfo) {
-                $ret = array (  '_controller' => 'fos_user.security.controller:checkAction',  '_route' => 'fos_user_security_check',);
-                if (!in_array($requestMethod, ['POST'])) {
-                    $allow = array_merge($allow, ['POST']);
-                    goto not_fos_user_security_check;
-                }
-
-                return $ret;
-            }
-            not_fos_user_security_check:
-
-        }
-
-        // fos_user_security_logout
-        if ('/logout' === $pathinfo) {
-            $ret = array (  '_controller' => 'fos_user.security.controller:logoutAction',  '_route' => 'fos_user_security_logout',);
-            if (!in_array($canonicalMethod, ['GET', 'POST'])) {
-                $allow = array_merge($allow, ['GET', 'POST']);
-                goto not_fos_user_security_logout;
-            }
-
-            return $ret;
-        }
-        not_fos_user_security_logout:
 
         if (0 === strpos($pathinfo, '/profile')) {
             // fos_user_profile_show
@@ -401,6 +468,11 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
             // blog_show
             if (0 === strpos($pathinfo, '/Blog/Details') && preg_match('#^/Blog/Details/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
                 return $this->mergeDefaults(array_replace($matches, ['_route' => 'blog_show']), array (  '_controller' => 'BlogBundle\\Controller\\DefaultController::showAction',));
+            }
+
+            // recherche_blog
+            if ('/Blog/searchblog' === $pathinfo) {
+                return array (  '_controller' => 'BlogBundle\\Controller\\DefaultController::RechercheBlogAction',  '_route' => 'recherche_blog',);
             }
 
         }
