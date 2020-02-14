@@ -9,3 +9,10 @@ shop_add:
 shop_details:
     path:     /details/{id}
     defaults: { _controller: ShopBundle:Default:details }
+
+shop_addtopanier:
+    path:     /panier/{id}
+    defaults: { _controller: ShopBundle:Panier:addToPanier }
+myproduct:
+    path:     /myproduct
+    defaults: { _controller: ShopBundle:Default:myproduct }

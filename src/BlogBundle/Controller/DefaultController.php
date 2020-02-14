@@ -6,6 +6,7 @@ use BlogBundle\Entity\Blog;
 use BlogBundle\Entity\Comment;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
@@ -28,10 +29,13 @@ class DefaultController extends Controller
         );
         $query = $em->createQuery('SELECT V From BlogBundle:Blog V order by V.dateCreation desc ')->setMaxResults(3);
         $blogmax = $query->getResult();
+        $category = $em->getRepository('BlogBundle:Categories')->findAll();
 
         return $this->render('BlogBundle:Default:index.html.twig', array(
             'blogs' => $pagination,
             'blogsmax' => $blogmax,
+            'Cat' => $category
+
         ));
     }
     public function newAction(Request $request)
@@ -85,12 +89,15 @@ class DefaultController extends Controller
         }
         $comments = $em->getRepository('BlogBundle:Comment')->findByBlog($post);
         $numberofcomments = count($comments);
+        $category = $em->getRepository('BlogBundle:Categories')->findAll();
+
         return $this->render('BlogBundle:Default:show.html.twig', array(
             'blog' => $blog,
             'delete_form' => $deleteForm->createView(),
             'numberofcomments' => $numberofcomments,
             'comments' => $comments,
-            'arr' => $arr
+            'arr' => $arr,
+            'Cat' => $category
         ));
     }
     /**
@@ -108,5 +115,38 @@ class DefaultController extends Controller
             ->getForm();
     }
 
+    public function RechercheBlogAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $requestString = $request->get('q');
+        $entities = $em->getRepository('BlogBundle:Blog')->AjaxRecherche($requestString);
+        if (!$entities) {
+            $result['entities']['error'] = "there is no Blog ";
+        } else {
+            $result['entities'] = $this->getRealEntities($entities);
+        }
+        return new Response(json_encode($result));
+
+    }
+
+
+    public function getRealEntities($entities)
+    {
+        foreach ($entities as $entity) {
+            $realEntities[$entity->getId()] = [
+                $entity->getTitle(),
+                $entity->getContent(),
+                $entity->getCategorie(),
+                $entity->getImage(),
+                $entity->getAuthor()->getUsername(),
+                $entity->getDateCreation()->format("Y-m-d"),
+                $entity->getLikesnumber(),
+                $entity->getRepliesnumber()
+
+            ];
+
+        }
+        return $realEntities;
+    }
 
 }

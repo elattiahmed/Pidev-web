@@ -65,13 +65,58 @@
                                         <div class="tm-prodetails-paras">
                                             <p>{{product.description}}</p>
                                         </div>
+                                        <form method="post" name="form1" action="{{ path('shop_addtopanier',{'id':product.id}) }}">
                                         <div class="tm-prodetails-quantitycart">
                                             <div class="tm-quantitybox">
-                                                <input type="text" value="1">
-                                            </div>
-                                            <a href="#" class="tm-button tm-button-dark">Add To Cart</a>
-                                        </div>
 
+{#                                                    {% if app.user == produit.utilisateur %}#}
+{#                                                    {% else %}#}
+
+                                                        <input name="quantity" title="Qty" class="form-control" value="1" type="text">
+
+
+{#                                                    {% endif %}#}
+{#                                                    {% if app.user == produit.utilisateur %}#}
+{#                                                    <a href="#" class="btn btn-blue btn-md with--icon" data-toggle="modal"#}
+{#                                                       data-target="#create-event">#}
+{#                                                        <svg class="olymp-shopping-bag-icon icon">#}
+{#                                                            <use xlink:href="{{ asset('template/') }}svg-icons/sprites/icons.svg#olymp-shopping-bag-icon"></use>#}
+{#                                                        </svg>#}
+{#                                                        <div class="text">#}
+{#                                                            <span class="title">Modifier</span>#}
+{#                                                        </div>#}
+{#                                                    </a>#}
+{#                                                    <a href="{{ path('shop_deleteproduct',{'id':produit.id}) }}"#}
+{#                                                       class="btn btn-danger btn-md with--icon">#}
+{#                                                        <svg class="olymp-shopping-bag-icon icon">#}
+{#                                                            <use xlink:href="{{ asset('template/') }}svg-icons/sprites/icons.svg#olymp-shopping-bag-icon"></use>#}
+{#                                                        </svg>#}
+{#                                                        <div class="text">#}
+{#                                                            <span class="title">Supprimer</span>#}
+{#                                                        </div>#}
+{#                                                    </a>#}
+{#                                                    {% else %}#}
+{#                                                    <button type="submit" class="btn btn-blue btn-md with--icon">#}
+{#                                                        #}{#<a href="{{ path('shop_addtopanier',{'id':produit.id}) }}" onclick="parentNode.submit();"  >#}
+{#                                                        <svg class="olymp-shopping-bag-icon icon">#}
+{#                                                            <use xlink:href="{{ asset('template/') }}svg-icons/sprites/icons.svg#olymp-shopping-bag-icon"></use>#}
+{#                                                        </svg>#}
+{#                                                        <div class="text">#}
+{#                                                            <span class="title">Ajouter au Panier</span>#}
+{#                                                        </div>#}
+{#                                                        #}{#</a>#}
+{#                                                    </button>#}
+{#                                               #}
+
+                                            </div>
+                                            {% if app.user %}
+                                            <button type="submit" class="tm-button tm-button-dark">Add To Cart</button>
+                                            {% else %}
+                                                <a href="{{ path('fos_user_security_login') }}">Log In / Register</a>
+
+                                            {% endif %}
+                                        </div>
+                                        </form>
                                         <div class="tm-prodetails-share">
                                             <h6>Share :</h6>
                                             <ul>

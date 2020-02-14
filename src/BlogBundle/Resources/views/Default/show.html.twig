@@ -138,14 +138,9 @@
                             <div class="single-widget widget-tags">
                                 <h6 class="widget-title">Popular Tags</h6>
                                 <ul>
-                                    <li><a href="#">Fishing</a></li>
-                                    <li><a href="#">Boats</a></li>
-                                    <li><a href="#">Gear</a></li>
-                                    <li><a href="#">Accessories</a></li>
-                                    <li><a href="#">Store</a></li>
-                                    <li><a href="#">Trips</a></li>
-                                    <li><a href="#">Fisherman</a></li>
-                                    <li><a href="#">Hooks</a></li>
+                                    {% for Cat in Cat %}
+                                        <li><a href="#">{{Cat.name}}</a></li>
+                                    {% endfor %}
                                 </ul>
                             </div>
 

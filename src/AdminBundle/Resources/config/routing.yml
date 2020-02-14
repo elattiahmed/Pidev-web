@@ -7,3 +7,21 @@ blog_new:
 blog_delete:
     path:     /Delete/{id}
     defaults: { _controller: BlogBundle:Default:delete }
+admin_users:
+    path:     /users
+    defaults: { _controller: AdminBundle:Default:AfficherUser }
+status:
+    path:     /status/{id}
+    defaults: { _controller: AdminBundle:Default:Status }
+affiche_msg:
+    path:     /messages
+    defaults: { _controller: AdminBundle:Default:AfficherMsg }
+all_blog:
+    path:     /blogs
+    defaults: { _controller: AdminBundle:Default:Afficherblogs }
+delete_blog:
+    path:     /removeblog/{id}
+    defaults: { _controller: AdminBundle:Default:Remove }
+msg_detais:
+    path:     /msg_detais/{id}
+    defaults: { _controller: AdminBundle:Default:MsgDetais }

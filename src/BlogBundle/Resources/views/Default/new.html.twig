@@ -1,3 +1,5 @@
+{% extends "base.html.twig" %}
+{% block content %}
 <h1>Blog creation</h1>
 
 {{ form_start(form) }}
@@ -10,3 +12,4 @@
         <a href="{{ path('blog_new') }}">Back to the list</a>
     </li>
 </ul>
+{% endblock %}

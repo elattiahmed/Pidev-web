@@ -107,6 +107,29 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
 
         }
 
+        elseif (0 === strpos($pathinfo, '/contact')) {
+            // contacus_homepage
+            if ('/contact' === $trimmedPathinfo) {
+                $ret = array (  '_controller' => 'ContacusBundle\\Controller\\DefaultController::indexAction',  '_route' => 'contacus_homepage',);
+                if ('/' === substr($pathinfo, -1)) {
+                    // no-op
+                } elseif ('GET' !== $canonicalMethod) {
+                    goto not_contacus_homepage;
+                } else {
+                    return array_replace($ret, $this->redirect($rawPathinfo.'/', 'contacus_homepage'));
+                }
+
+                return $ret;
+            }
+            not_contacus_homepage:
+
+            // contact
+            if ('/contact' === $pathinfo) {
+                return array (  '_controller' => 'AppBundle\\Controller\\DefaultController::contactAction',  '_route' => 'contact',);
+            }
+
+        }
+
         elseif (0 === strpos($pathinfo, '/Admin')) {
             // admin_homepage
             if ('/Admin' === $trimmedPathinfo) {
@@ -128,9 +151,39 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
                 return array (  '_controller' => 'BlogBundle\\Controller\\DefaultController::newAction',  '_route' => 'blog_new',);
             }
 
+            // all_blog
+            if ('/Admin/blogs' === $pathinfo) {
+                return array (  '_controller' => 'AdminBundle\\Controller\\DefaultController::AfficherblogsAction',  '_route' => 'all_blog',);
+            }
+
             // blog_delete
             if (0 === strpos($pathinfo, '/Admin/Delete') && preg_match('#^/Admin/Delete/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
                 return $this->mergeDefaults(array_replace($matches, ['_route' => 'blog_delete']), array (  '_controller' => 'BlogBundle\\Controller\\DefaultController::deleteAction',));
+            }
+
+            // admin_users
+            if ('/Admin/users' === $pathinfo) {
+                return array (  '_controller' => 'AdminBundle\\Controller\\DefaultController::AfficherUserAction',  '_route' => 'admin_users',);
+            }
+
+            // status
+            if (0 === strpos($pathinfo, '/Admin/status') && preg_match('#^/Admin/status/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, ['_route' => 'status']), array (  '_controller' => 'AdminBundle\\Controller\\DefaultController::StatusAction',));
+            }
+
+            // affiche_msg
+            if ('/Admin/messages' === $pathinfo) {
+                return array (  '_controller' => 'AdminBundle\\Controller\\DefaultController::AfficherMsgAction',  '_route' => 'affiche_msg',);
+            }
+
+            // msg_detais
+            if (0 === strpos($pathinfo, '/Admin/msg_detais') && preg_match('#^/Admin/msg_detais/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, ['_route' => 'msg_detais']), array (  '_controller' => 'AdminBundle\\Controller\\DefaultController::MsgDetaisAction',));
+            }
+
+            // delete_blog
+            if (0 === strpos($pathinfo, '/Admin/removeblog') && preg_match('#^/Admin/removeblog/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, ['_route' => 'delete_blog']), array (  '_controller' => 'AdminBundle\\Controller\\DefaultController::RemoveAction',));
             }
 
         }
@@ -161,6 +214,16 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
                 return $this->mergeDefaults(array_replace($matches, ['_route' => 'shop_details']), array (  '_controller' => 'ShopBundle\\Controller\\DefaultController::detailsAction',));
             }
 
+            // shop_addtopanier
+            if (0 === strpos($pathinfo, '/Shop/panier') && preg_match('#^/Shop/panier/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, ['_route' => 'shop_addtopanier']), array (  '_controller' => 'ShopBundle\\Controller\\PanierController::addToPanierAction',));
+            }
+
+            // myproduct
+            if ('/Shop/myproduct' === $pathinfo) {
+                return array (  '_controller' => 'ShopBundle\\Controller\\DefaultController::myproductAction',  '_route' => 'myproduct',);
+            }
+
         }
 
         // homepage
@@ -177,11 +240,6 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
             return $ret;
         }
         not_homepage:
-
-        // contact
-        if ('/contact' === $pathinfo) {
-            return array (  '_controller' => 'AppBundle\\Controller\\DefaultController::contactAction',  '_route' => 'contact',);
-        }
 
         if (0 === strpos($pathinfo, '/login')) {
             // fos_user_security_login
@@ -401,6 +459,16 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
             // blog_show
             if (0 === strpos($pathinfo, '/Blog/Details') && preg_match('#^/Blog/Details/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
                 return $this->mergeDefaults(array_replace($matches, ['_route' => 'blog_show']), array (  '_controller' => 'BlogBundle\\Controller\\DefaultController::showAction',));
+            }
+
+            // recherche_blog
+            if ('/Blog/searchblog' === $pathinfo) {
+                return array (  '_controller' => 'BlogBundle\\Controller\\DefaultController::RechercheBlogAction',  '_route' => 'recherche_blog',);
+            }
+
+            // new_blog
+            if ('/Blog/newblog' === $pathinfo) {
+                return array (  '_controller' => 'BlogBundle\\Controller\\DefaultController::newAction',  '_route' => 'new_blog',);
             }
 
         }

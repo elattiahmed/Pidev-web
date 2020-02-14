@@ -24,6 +24,8 @@
       <parameter key="BlogBundle">BlogBundle\BlogBundle</parameter>
       <parameter key="VichUploaderBundle">Vich\UploaderBundle\VichUploaderBundle</parameter>
       <parameter key="FOSCKEditorBundle">FOS\CKEditorBundle\FOSCKEditorBundle</parameter>
+      <parameter key="NomayaSocialBundle">Nomaya\SocialBundle\NomayaSocialBundle</parameter>
+      <parameter key="ContacusBundle">ContacusBundle\ContacusBundle</parameter>
       <parameter key="DebugBundle">Symfony\Bundle\DebugBundle\DebugBundle</parameter>
       <parameter key="WebProfilerBundle">Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</parameter>
       <parameter key="SensioDistributionBundle">Sensio\Bundle\DistributionBundle\SensioDistributionBundle</parameter>
@@ -105,6 +107,16 @@
         <parameter key="parent">null</parameter>
         <parameter key="path">C:\xampp\htdocs\Pidev-web\vendor\friendsofsymfony\ckeditor-bundle\src</parameter>
         <parameter key="namespace">FOS\CKEditorBundle</parameter>
+      </parameter>
+      <parameter key="NomayaSocialBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">C:\xampp\htdocs\Pidev-web\vendor\nomaya\social-bundle\Nomaya\SocialBundle</parameter>
+        <parameter key="namespace">Nomaya\SocialBundle</parameter>
+      </parameter>
+      <parameter key="ContacusBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">C:\xampp\htdocs\Pidev-web\src\ContacusBundle</parameter>
+        <parameter key="namespace">ContacusBundle</parameter>
       </parameter>
       <parameter key="DebugBundle" type="collection">
         <parameter key="parent">null</parameter>
@@ -452,6 +464,62 @@
       </parameter>
     </parameter>
     <parameter key="vich_uploader.file_injector.class">Vich\UploaderBundle\Injector\FileInjector</parameter>
+    <parameter key="buttons.facebook" type="collection">
+      <parameter key="url">null</parameter>
+      <parameter key="locale">fr_FR</parameter>
+      <parameter key="send">false</parameter>
+      <parameter key="width">300</parameter>
+      <parameter key="showFaces">false</parameter>
+      <parameter key="layout">button_count</parameter>
+      <parameter key="share">true</parameter>
+    </parameter>
+    <parameter key="buttons.twitter" type="collection">
+      <parameter key="url">null</parameter>
+      <parameter key="locale">fr</parameter>
+      <parameter key="message">Je veux partager ça avec vous</parameter>
+      <parameter key="text">Tweet</parameter>
+      <parameter key="via">L'Equipe cartedevisitevirtuelle.fr</parameter>
+      <parameter key="tag">ttot</parameter>
+      <parameter key="showFaces">false</parameter>
+      <parameter key="send">true</parameter>
+      <parameter key="share">true</parameter>
+    </parameter>
+    <parameter key="buttons.googleplus" type="collection">
+      <parameter key="url">null</parameter>
+      <parameter key="locale">fr</parameter>
+      <parameter key="size">medium</parameter>
+      <parameter key="annotation">bubble</parameter>
+      <parameter key="width">300</parameter>
+      <parameter key="showFaces">false</parameter>
+      <parameter key="send">true</parameter>
+      <parameter key="share">true</parameter>
+    </parameter>
+    <parameter key="buttons.linkedin" type="collection">
+      <parameter key="url">null</parameter>
+      <parameter key="locale">fr_FR</parameter>
+      <parameter key="counter">right</parameter>
+      <parameter key="showFaces">false</parameter>
+      <parameter key="send">true</parameter>
+      <parameter key="share">true</parameter>
+    </parameter>
+    <parameter key="buttons.pinterest" type="collection">
+      <parameter key="url">null</parameter>
+      <parameter key="locale">en</parameter>
+      <parameter key="showFaces">false</parameter>
+      <parameter key="send">true</parameter>
+      <parameter key="share">true</parameter>
+    </parameter>
+    <parameter key="links.facebook" type="collection">
+      <parameter key="network">facebook</parameter>
+      <parameter key="url">http://www.facebook.com/yann.chauvel</parameter>
+      <parameter key="theme">default</parameter>
+    </parameter>
+    <parameter key="links.googleplus" type="collection">
+      <parameter key="network">googleplus</parameter>
+      <parameter key="url">https://plus.google.com/105931415830389032796</parameter>
+      <parameter key="theme">default</parameter>
+    </parameter>
+    <parameter key="social.theme">default</parameter>
     <parameter key="web_profiler.debug_toolbar.position">bottom</parameter>
     <parameter key="web_profiler.debug_toolbar.intercept_redirects">false</parameter>
     <parameter key="web_profiler.debug_toolbar.mode">2</parameter>
@@ -3851,6 +3919,12 @@
         <argument type="service" id="fos_ck_editor.twig_extension"/>
       </call>
       <call method="addExtension">
+        <argument type="service" id="twig.extension.nomaya_social_bar"/>
+      </call>
+      <call method="addExtension">
+        <argument type="service" id="twig.extension.nomaya_social_links"/>
+      </call>
+      <call method="addExtension">
         <argument type="service" id="twig.extension.webprofiler"/>
       </call>
       <call method="addGlobal">
@@ -4001,6 +4075,22 @@
       <call method="addPath">
         <argument>C:\xampp\htdocs\Pidev-web\vendor\friendsofsymfony\ckeditor-bundle\src/Resources/views</argument>
         <argument>!FOSCKEditor</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\xampp\htdocs\Pidev-web\vendor\nomaya\social-bundle\Nomaya\SocialBundle/Resources/views</argument>
+        <argument>NomayaSocial</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\xampp\htdocs\Pidev-web\vendor\nomaya\social-bundle\Nomaya\SocialBundle/Resources/views</argument>
+        <argument>!NomayaSocial</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\xampp\htdocs\Pidev-web\src\ContacusBundle/Resources/views</argument>
+        <argument>Contacus</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\xampp\htdocs\Pidev-web\src\ContacusBundle/Resources/views</argument>
+        <argument>!Contacus</argument>
       </call>
       <call method="addPath">
         <argument>C:\xampp\htdocs\Pidev-web\vendor\symfony\symfony\src\Symfony\Bundle\DebugBundle/Resources/views</argument>
@@ -4232,6 +4322,22 @@
       <call method="addPath">
         <argument>C:\xampp\htdocs\Pidev-web\vendor\friendsofsymfony\ckeditor-bundle\src/Resources/views</argument>
         <argument>!FOSCKEditor</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\xampp\htdocs\Pidev-web\vendor\nomaya\social-bundle\Nomaya\SocialBundle/Resources/views</argument>
+        <argument>NomayaSocial</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\xampp\htdocs\Pidev-web\vendor\nomaya\social-bundle\Nomaya\SocialBundle/Resources/views</argument>
+        <argument>!NomayaSocial</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\xampp\htdocs\Pidev-web\src\ContacusBundle/Resources/views</argument>
+        <argument>Contacus</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\xampp\htdocs\Pidev-web\src\ContacusBundle/Resources/views</argument>
+        <argument>!Contacus</argument>
       </call>
       <call method="addPath">
         <argument>C:\xampp\htdocs\Pidev-web\vendor\symfony\symfony\src\Symfony\Bundle\DebugBundle/Resources/views</argument>
@@ -4738,6 +4844,7 @@
           <argument key="AppBundle">AppBundle\Entity</argument>
           <argument key="ShopBundle">ShopBundle\Entity</argument>
           <argument key="BlogBundle">BlogBundle\Entity</argument>
+          <argument key="ContacusBundle">ContacusBundle\Entity</argument>
         </argument>
       </call>
       <call method="setMetadataCacheImpl">
@@ -4786,6 +4893,7 @@
         <argument>C:\xampp\htdocs\Pidev-web\src\AppBundle\Entity</argument>
         <argument>C:\xampp\htdocs\Pidev-web\src\ShopBundle\Entity</argument>
         <argument>C:\xampp\htdocs\Pidev-web\src\BlogBundle\Entity</argument>
+        <argument>C:\xampp\htdocs\Pidev-web\src\ContacusBundle\Entity</argument>
       </argument>
     </service>
     <service id="doctrine.orm.default_metadata_driver" class="Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain" public="false">
@@ -4800,6 +4908,10 @@
       <call method="addDriver">
         <argument type="service" id="doctrine.orm.default_annotation_metadata_driver"/>
         <argument>BlogBundle\Entity</argument>
+      </call>
+      <call method="addDriver">
+        <argument type="service" id="doctrine.orm.default_annotation_metadata_driver"/>
+        <argument>ContacusBundle\Entity</argument>
       </call>
       <call method="addDriver">
         <argument type="service">
@@ -5440,6 +5552,31 @@
     <service id="fos_ck_editor.twig_extension" class="FOS\CKEditorBundle\Twig\CKEditorExtension">
       <tag name="twig.extension"/>
       <argument type="service" id="fos_ck_editor.renderer"/>
+    </service>
+    <service id="nomaya.socialBarHelper" class="Nomaya\SocialBundle\Helpers\SocialBarHelper">
+      <tag name="templating.helper" alias="social-buttons"/>
+      <argument type="service" id="templating.engine.twig"/>
+    </service>
+    <service id="twig.extension.nomaya_social_bar" class="Nomaya\SocialBundle\Twig\Extension\NomayaTwigSocialBar">
+      <tag name="twig.extension"/>
+      <argument type="service" id="service_container"/>
+      <call method="setNetworks">
+        <argument type="collection">
+          <argument>facebook</argument>
+          <argument>twitter</argument>
+          <argument>googleplus</argument>
+          <argument>linkedin</argument>
+          <argument>pinterest</argument>
+        </argument>
+      </call>
+    </service>
+    <service id="nomaya.socialLinksHelper" class="Nomaya\SocialBundle\Helpers\SocialLinksHelper">
+      <tag name="templating.helper" alias="social-links"/>
+      <argument type="service" id="templating.engine.twig"/>
+    </service>
+    <service id="twig.extension.nomaya_social_links" class="Nomaya\SocialBundle\Twig\Extension\NomayaTwigSocialLinks">
+      <tag name="twig.extension"/>
+      <argument type="service" id="service_container"/>
     </service>
     <service id="twig.extension.dump" class="Symfony\Bridge\Twig\Extension\DumpExtension" public="false">
       <tag name="twig.extension"/>
