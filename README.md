@@ -54,8 +54,7 @@ All libraries and bundles included in the Symfony Standard Edition are
 released under the MIT or BSD license.
 
 Enjoy!
-
-https://prnt.sc/r31lhs
+![image](https://prnt.sc/r31lhs)
 ============
-https://prnt.sc/r31lng
+![image](https://prnt.sc/r31lng)
 ===========
