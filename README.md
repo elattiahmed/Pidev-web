@@ -53,5 +53,4 @@ It comes pre-configured with the following bundles:
 All libraries and bundles included in the Symfony Standard Edition are
 released under the MIT or BSD license.
 
-Enjoy!
-![alt text](https://prnt.sc/r31lng)
+https://prnt.sc/r31lng
