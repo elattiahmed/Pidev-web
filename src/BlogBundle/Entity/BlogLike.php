@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * BlogLike
- *
+ * @ORM\Entity
  * @ORM\Table(name="blog_like")
  */
 class BlogLike
@@ -27,6 +27,33 @@ class BlogLike
      *   @ORM\JoinColumn(name="user", referencedColumnName="id")})
      */
     private $user;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="acceptlike", type="boolean")
+     */
+    private $acceptlike;
+
+    /**
+     * @return bool
+     */
+    public function isAcceptlike()
+    {
+        return $this->acceptlike;
+    }
+
+    /**
+     * @param bool $acceptlike
+     */
+    public function setAcceptlike($acceptlike)
+    {
+        $this->acceptlike = $acceptlike;
+    }
+
+
+
+
 
     /**
      *

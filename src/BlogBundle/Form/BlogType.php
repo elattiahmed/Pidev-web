@@ -20,6 +20,7 @@ class BlogType extends AbstractType
             ->add('content', CKEditorType::class)
             ->add('categorie',EntityType::class, array('class'=> 'BlogBundle\Entity\Categories', 'choice_label'=>'name'))
             ->add('imageFile', VichImageType::class)
+
         ;
     }/**
      * {@inheritdoc}

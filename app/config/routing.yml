@@ -18,3 +18,6 @@ fos_user:
 blog:
     resource: "@BlogBundle/Resources/config/routing.yml"
     prefix:   /Blog
+location:
+    resource: "@LocationBundle/Resources/config/routing.yml"
+    prefix:   /location

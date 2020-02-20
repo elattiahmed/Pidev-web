@@ -26,6 +26,7 @@
       <parameter key="FOSCKEditorBundle">FOS\CKEditorBundle\FOSCKEditorBundle</parameter>
       <parameter key="NomayaSocialBundle">Nomaya\SocialBundle\NomayaSocialBundle</parameter>
       <parameter key="ContacusBundle">ContacusBundle\ContacusBundle</parameter>
+      <parameter key="LocationBundle">LocationBundle\LocationBundle</parameter>
       <parameter key="DebugBundle">Symfony\Bundle\DebugBundle\DebugBundle</parameter>
       <parameter key="WebProfilerBundle">Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</parameter>
       <parameter key="SensioDistributionBundle">Sensio\Bundle\DistributionBundle\SensioDistributionBundle</parameter>
@@ -118,6 +119,11 @@
         <parameter key="path">C:\xampp\htdocs\Pidev-web\src\ContacusBundle</parameter>
         <parameter key="namespace">ContacusBundle</parameter>
       </parameter>
+      <parameter key="LocationBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">C:\xampp\htdocs\Pidev-web\src\LocationBundle</parameter>
+        <parameter key="namespace">LocationBundle</parameter>
+      </parameter>
       <parameter key="DebugBundle" type="collection">
         <parameter key="parent">null</parameter>
         <parameter key="path">C:\xampp\htdocs\Pidev-web\vendor\symfony\symfony\src\Symfony\Bundle\DebugBundle</parameter>
@@ -160,6 +166,7 @@
     <parameter key="secret">ThisTokenIsNotSoSecretChangeIt</parameter>
     <parameter key="locale">en</parameter>
     <parameter key="images_shop">C:\xampp\htdocs\Pidev-web/web/shopImg</parameter>
+    <parameter key="usersPictures">C:\xampp\htdocs\Pidev-web/web/usersPictures</parameter>
     <parameter key="fragment.renderer.hinclude.global_template">null</parameter>
     <parameter key="fragment.path">/_fragment</parameter>
     <parameter key="kernel.secret">ThisTokenIsNotSoSecretChangeIt</parameter>
@@ -726,6 +733,11 @@
     </service>
     <service id="AppBundle\Listener\LoginSuccessHandler" class="AppBundle\Listener\LoginSuccessHandler" public="false" autowire="true" autoconfigure="true">
       <argument type="service" id="router.default"/>
+    </service>
+    <service id="AppBundle\Service\Variables" class="AppBundle\Service\Variables" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <argument type="service" id="doctrine.orm.default_entity_manager"/>
+      <argument type="service" id="service_container"/>
     </service>
     <service id="controller_name_converter" class="Symfony\Bundle\FrameworkBundle\Controller\ControllerNameParser" public="false">
       <tag name="monolog.logger" channel="request"/>
@@ -3934,6 +3946,10 @@
       <call method="addRuntimeLoader">
         <argument type="service" id="twig.runtime_loader"/>
       </call>
+      <call method="addGlobal">
+        <argument>Count</argument>
+        <argument type="service" id="AppBundle\Service\Variables"/>
+      </call>
       <configurator service="twig.configurator.environment" method="configure"/>
     </service>
     <service id="twig.app_variable" class="Symfony\Bridge\Twig\AppVariable" public="false">
@@ -4091,6 +4107,14 @@
       <call method="addPath">
         <argument>C:\xampp\htdocs\Pidev-web\src\ContacusBundle/Resources/views</argument>
         <argument>!Contacus</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\xampp\htdocs\Pidev-web\src\LocationBundle/Resources/views</argument>
+        <argument>Location</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\xampp\htdocs\Pidev-web\src\LocationBundle/Resources/views</argument>
+        <argument>!Location</argument>
       </call>
       <call method="addPath">
         <argument>C:\xampp\htdocs\Pidev-web\vendor\symfony\symfony\src\Symfony\Bundle\DebugBundle/Resources/views</argument>
@@ -4338,6 +4362,14 @@
       <call method="addPath">
         <argument>C:\xampp\htdocs\Pidev-web\src\ContacusBundle/Resources/views</argument>
         <argument>!Contacus</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\xampp\htdocs\Pidev-web\src\LocationBundle/Resources/views</argument>
+        <argument>Location</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\xampp\htdocs\Pidev-web\src\LocationBundle/Resources/views</argument>
+        <argument>!Location</argument>
       </call>
       <call method="addPath">
         <argument>C:\xampp\htdocs\Pidev-web\vendor\symfony\symfony\src\Symfony\Bundle\DebugBundle/Resources/views</argument>
@@ -4843,8 +4875,10 @@
         <argument type="collection">
           <argument key="AppBundle">AppBundle\Entity</argument>
           <argument key="ShopBundle">ShopBundle\Entity</argument>
+          <argument key="AdminBundle">AdminBundle\Entity</argument>
           <argument key="BlogBundle">BlogBundle\Entity</argument>
           <argument key="ContacusBundle">ContacusBundle\Entity</argument>
+          <argument key="LocationBundle">LocationBundle\Entity</argument>
         </argument>
       </call>
       <call method="setMetadataCacheImpl">
@@ -4892,8 +4926,10 @@
       <argument type="collection">
         <argument>C:\xampp\htdocs\Pidev-web\src\AppBundle\Entity</argument>
         <argument>C:\xampp\htdocs\Pidev-web\src\ShopBundle\Entity</argument>
+        <argument>C:\xampp\htdocs\Pidev-web\src\AdminBundle\Entity</argument>
         <argument>C:\xampp\htdocs\Pidev-web\src\BlogBundle\Entity</argument>
         <argument>C:\xampp\htdocs\Pidev-web\src\ContacusBundle\Entity</argument>
+        <argument>C:\xampp\htdocs\Pidev-web\src\LocationBundle\Entity</argument>
       </argument>
     </service>
     <service id="doctrine.orm.default_metadata_driver" class="Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain" public="false">
@@ -4907,11 +4943,19 @@
       </call>
       <call method="addDriver">
         <argument type="service" id="doctrine.orm.default_annotation_metadata_driver"/>
+        <argument>AdminBundle\Entity</argument>
+      </call>
+      <call method="addDriver">
+        <argument type="service" id="doctrine.orm.default_annotation_metadata_driver"/>
         <argument>BlogBundle\Entity</argument>
       </call>
       <call method="addDriver">
         <argument type="service" id="doctrine.orm.default_annotation_metadata_driver"/>
         <argument>ContacusBundle\Entity</argument>
+      </call>
+      <call method="addDriver">
+        <argument type="service" id="doctrine.orm.default_annotation_metadata_driver"/>
+        <argument>LocationBundle\Entity</argument>
       </call>
       <call method="addDriver">
         <argument type="service">
@@ -5722,6 +5766,8 @@
     </service>
     <service id="instanceof.Symfony\Bundle\FrameworkBundle\Controller\Controller.0.AppBundle\Controller\DefaultController" class="AppBundle\Controller\DefaultController" public="true" autowire="true" abstract="true"/>
     <service id="abstract.instanceof.AppBundle\Controller\DefaultController" class="AppBundle\Controller\DefaultController" public="true" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id="instanceof.Symfony\Bundle\FrameworkBundle\Controller\Controller.0.AppBundle\Service\Variables" class="AppBundle\Service\Variables" public="false" autowire="true" abstract="true"/>
+    <service id="abstract.instanceof.AppBundle\Service\Variables" class="AppBundle\Service\Variables" public="false" autowire="true" autoconfigure="true" abstract="true"/>
     <service id="service_locator.sr6ctxe" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection"/>

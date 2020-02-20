@@ -19,9 +19,54 @@ affiche_msg:
 all_blog:
     path:     /blogs
     defaults: { _controller: AdminBundle:Default:Afficherblogs }
+all_produits:
+    path:     /produits
+    defaults: { _controller: AdminBundle:Default:AfficherProducts }
+delete_prod:
+    path:     /removeprod/{id}
+    defaults: { _controller: AdminBundle:Default:RemoveProd }
 delete_blog:
     path:     /removeblog/{id}
     defaults: { _controller: AdminBundle:Default:Remove }
 msg_detais:
     path:     /msg_detais/{id}
     defaults: { _controller: AdminBundle:Default:MsgDetais }
+edit_profile:
+    path:     /edit_profile
+    defaults: { _controller: AdminBundle:Default:edit_profile }
+new_blog:
+    path:     /newblog
+    defaults: { _controller: AdminBundle:Default:new }
+blog_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AdminBundle:Default:editBlog" }
+newCatgoriesBlog:
+    path:     /newcatblog
+    defaults: { _controller: "AdminBundle:Default:newCatgories" }
+newCatgoriesShop:
+    path:     /newcatshop
+    defaults: { _controller: "AdminBundle:Default:newCatgoriesShop" }
+addproduct:
+    path:     /addproduct
+    defaults: { _controller: "AdminBundle:Default:addProdct" }
+editProdct:
+    path:     /editProdct/{id}
+    defaults: { _controller: "AdminBundle:Default:editProdct" }
+add_location_products:
+    path:     /add_location_products
+    defaults: { _controller: "AdminBundle:Location:add" }
+all_location_products:
+    path:     /all_location_products
+    defaults: { _controller: "AdminBundle:Location:AfficherLocation" }
+deletelocation:
+    path:     /deletelocation/{id}
+    defaults: { _controller: "AdminBundle:Location:deletelocation" }
+editlocation:
+    path:     /editlocation/{id}
+    defaults: { _controller: "AdminBundle:Location:editlocation" }
+reply:
+    path:     /reply/{id}
+    defaults: { _controller: "AdminBundle:Send:create" }
+acceptblog:
+    path:     /acceptblog/{id}
+    defaults: { _controller: "AdminBundle:Default:acceptblog" }
