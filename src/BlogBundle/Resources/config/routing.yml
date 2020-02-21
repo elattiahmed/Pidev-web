@@ -7,6 +7,15 @@ blog_show:
 recherche_blog:
     path:     /searchblog
     defaults: { _controller: BlogBundle:Default:RechercheBlog }
-new_blog:
-    path:     /newblog
+ByCategorie:
+    path:     /categorie/{cat}
+    defaults: { _controller: BlogBundle:Default:ByCategorie }
+like_blog:
+    path:     /like/{id}
+    defaults: { _controller: BlogBundle:Default:likeBlog }
+dislikeblog:
+    path:     /dislikeblog/{id}
+    defaults: { _controller: BlogBundle:Default:dislikeblog }
+addblog:
+    path:     /addblog/
     defaults: { _controller: BlogBundle:Default:new }

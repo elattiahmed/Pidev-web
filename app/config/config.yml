@@ -12,6 +12,7 @@ imports:
 parameters:
     locale: en
     images_shop: '%kernel.project_dir%/web/shopImg'
+    usersPictures: '%kernel.project_dir%/web/usersPictures'
 
 framework:
     #esi: ~
@@ -44,6 +45,8 @@ twig:
     strict_variables: '%kernel.debug%'
     form_themes:
         - '@FOSCKEditor/Form/ckeditor_widget.html.twig'
+    globals:
+        Count: '@AppBundle\Service\Variables'
 # Doctrine Configuration
 doctrine:
     dbal:

@@ -22,6 +22,7 @@
                     <div class="col-lg-8">
                         <div class="row mt-50-reverse" id="blogRecherche">
                             {% for blog in blogs %}
+                                {% if blog.accept == '1' %}
                                 <div class="col-lg-6 col-md-6 col-12 mt-50">
                                     <div class="tm-blog tm-scrollanim">
                                         <div class="tm-blog-topside">
@@ -50,13 +51,13 @@
                                                     {% endif %}
                                                 </li>
                                             </ul>
-                                            <p>{{ blog.content|raw }}</p>
+                                            <p>{{ blog.content|raw(50) }} </p>
                                             <a href="{{ path('blog_show',{id:blog.id}) }}" class="tm-readmore">Read
                                                 more</a>
                                         </div>
                                     </div>
                                 </div>
-
+{% endif %}
                             {% endfor %}
                         </div>
 
@@ -107,7 +108,7 @@
                                 <h6 class="widget-title">Popular Category</h6>
                                 <ul>
                                     {% for Cat in Cat %}
-                                        <li><a href="#">{{ Cat.name }}</a></li>
+                                        <li><a href="{{ path('ByCategorie',{cat:Cat.name}) }}">{{Cat.name}}</a></li>
                                     {% endfor %}
                                 </ul>
                             </div>

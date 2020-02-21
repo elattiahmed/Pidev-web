@@ -26,6 +26,7 @@ class AppKernel extends Kernel
             new FOS\CKEditorBundle\FOSCKEditorBundle(),
             new Nomaya\SocialBundle\NomayaSocialBundle(),
             new ContacusBundle\ContacusBundle(),
+            new LocationBundle\LocationBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

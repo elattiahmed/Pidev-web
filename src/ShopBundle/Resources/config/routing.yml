@@ -2,9 +2,6 @@ shop_homepage:
     path:     /
     defaults: { _controller: ShopBundle:Default:index }
 
-shop_add:
-    path:     /add
-    defaults: { _controller: ShopBundle:Default:add }
 
 shop_details:
     path:     /details/{id}
@@ -16,3 +13,14 @@ shop_addtopanier:
 myproduct:
     path:     /myproduct
     defaults: { _controller: ShopBundle:Default:myproduct }
+checkout:
+    path:     /checkout
+    defaults: { _controller: ShopBundle:Panier:checkout }
+deletech:
+    path:     /delete/{id}
+    defaults: { _controller: ShopBundle:Panier:deletech }
+
+orders:
+    path:     /orders/{total}
+    defaults: { _controller: ShopBundle:Panier:order }
+

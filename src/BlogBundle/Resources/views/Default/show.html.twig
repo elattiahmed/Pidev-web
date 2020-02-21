@@ -38,6 +38,15 @@
                                     <li><a href="#"><i class="ion-android-person"></i> {{ blog.author }}</a></li>
                                     <li><i class="ion-android-calendar"></i> {{ blog.dateCreation|date }}</li>
                                     <li><a href="#"><i class="ion-chatbubbles"></i> {{ numberofcomments }}</a></li>
+
+                                    {% if likeornot == '0'%}
+
+                                    <li><a href="{{ path('like_blog',{id:blog.id}) }}"><i class="ion-android-favorite"></i>{{ numlikes }}</a></li>
+                                        {% else %}
+                                            <li><i class="ion-android-favorite"></i>{{ numlikes }}</li>
+
+                                    {% endif %}
+
                                 </ul>
                                 {{ blog.content|raw }}
                             </div>
@@ -78,7 +87,7 @@
                                     {% for comment in comments %}
                                         <div class="tm-comment">
                                             <a href="blog.html" class="tm-comment-thumb">
-                                                <img src="{{ asset('Front/') }}assets/images/author-image-2.png" alt="author image">
+                                                <img src="{{ asset('usersPictures/' ~ comment.user.imageId) }}" alt="author image">
                                             </a>
                                             <div class="tm-comment-content">
                                                 <h6 class="tm-comment-authorname"><a
@@ -96,13 +105,13 @@
                                                     {% endif %}
                                         </span>
                                                 <p>{{ comment.content }}</p>
-                                                <a href="#" class="tm-comment-replybutton"><i class="ion-reply-all"></i>
-                                                    Reply</a>
+
                                             </div>
                                         </div>
                                     {% endfor %}
                                 </div>
                             </div>
+
                             <div class="blogitem-commentbox mt-30">
                                 <h5 class="small-title">Leave a Comment </h5>
 
@@ -139,7 +148,7 @@
                                 <h6 class="widget-title">Popular Tags</h6>
                                 <ul>
                                     {% for Cat in Cat %}
-                                        <li><a href="#">{{Cat.name}}</a></li>
+                                        <li><a href="{{ path('ByCategorie',{cat:Cat.name}) }}">{{Cat.name}}</a></li>
                                     {% endfor %}
                                 </ul>
                             </div>
@@ -151,4 +160,5 @@
         </div>
 
     </main>
+
 {% endblock %}

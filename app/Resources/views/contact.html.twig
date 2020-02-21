@@ -1,6 +1,7 @@
 {% extends "base.html.twig" %}
 
 {% block content %}
+
 <!-- Breadcrumb Area -->
 <div class="tm-breadcrumb-area tm-padding-section bg-grey" data-bgimage="{{ asset('front/') }}assets/images/breadcrumb-bg.jpg"
      data-white-overlay="2">
@@ -52,7 +53,7 @@
                                 </div>
                                 <div class="tm-form-field">
                                     <label for="contact-form-message">Message</label>
-                                    {{form_widget(form.message)}}
+                                    {{form_widget(form.message|raw)}}
                                 </div>
                                 <div class="tm-form-field">
 

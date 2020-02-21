@@ -16,7 +16,7 @@
     <!-- inject:css -->
     <link rel="stylesheet" href="{{ asset('Front/') }}assets/css/vendors/plugins.min.css">
     <link rel="stylesheet" href="{{ asset('Front/') }}assets/css/style.css">
-{#    <script src="{{ asset('Front/') }}jquery-3.3.1.min.js"></script>#}
+    {#    <script src="{{ asset('Front/') }}jquery-3.3.1.min.js"></script>#}
 
     <!-- endinject -->
 </head>
@@ -58,13 +58,32 @@
                     <div class="col-lg-4 col-12">
                         <ul class="tm-header-icons">
                             {% if app.user %}
-                                <li><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>
+                                <li>
+
+                                    <div class="dropdown-menu-left">
+                                        <button class="btn btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                                            <img src="{{ asset('usersPictures/' ~ app.user.imageId) }}" style="border-radius: 50%" alt="dropdown image" class="img-responsive"  width="35" height="35">
+                                            <span class="caret"> {{ app.user.username }}</span>
+                                        </button>
+                                        <ul class="dropdown-menu fa-user" >
+                                            <li ><a style="color: #0b0b0b" href="{{ path('fos_user_security_logout') }}">Log Out</a></li>
+                                            {% if is_granted('ROLE_ADMIN') %}
+                                            <li ><a style="color: #0b0b0b" href="{{ path('admin_homepage') }}">Panel Admin</a></li>
+                                            {% else %}
+
+                                            <li ><a style="color: #0b0b0b" href="{{ path('fos_user_profile_edit') }}">Edit Profile</a></li>
+                                                <li ><a style="color: #0b0b0b" href="{{ path('fos_user_change_password') }}">Edit Password</a></li>
+                                            {% endif %}
+                                        </ul>
+                                    </div>
+                                </li>
 
                             {% else %}
                                 <li><a href="{{ path('fos_user_security_login') }}">Log In / Register</a></li>
                             {% endif %}
                         </ul>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -72,34 +91,35 @@
         <div class="tm-header-bottomarea">
             <div class="container">
                 <div class="tm-header-inner">
-                    <a href="{{ path('homepage')}}" class="tm-header-logo">
+                    <a href="{{ path('homepage') }}" class="tm-header-logo">
                         <img src="{{ asset('Front/') }}assets/images/logo.png" alt="malic">
                     </a>
                     <nav class="tm-header-nav">
                         <ul>
-                            <li><a href="{{path('homepage')}}">Home</a></li>
-                            <li><a href="about.html">About</a></li>
-                            <li><a href="services.html">Evenment</a></li>
+                            <li><a href="{{ path('homepage') }}">Home</a></li>
+                            <li><a href="{{ path('homepage') }}">Evenment</a></li>
                             <li class="tm-header-nav-dropdown"><a href="#">Shop</a>
                                 <ul>
-                                    <li><a href="{{path('shop_homepage')}}">Our Products</a></li>
+                                    <li><a href="{{ path('shop_homepage') }}">Our Products</a></li>
                                     {% if app.user %}
-                                    <li><a href="{{path('shop_add')}}">Add Product</a></li>
-                                    <li><a href="{{ path('myproduct')}}">My Products</a></li>
                                     {% endif %}
                                 </ul>
                             </li>
                             <li class="tm-header-nav-dropdown"><a href="#">Blog</a>
                                 <ul>
-                                    <li><a href="{{path('blog_homepage')}}">Our Blog</a></li>
-                                    {% if is_granted('ROLE_ADMIN') %}
-                                        <li><a href="{{path('new_blog')}}">Add Blog</a>
-
-                                        </li>
+                                    <li><a href="{{ path('blog_homepage') }}">Our Blog</a></li>
+                                    {% if app.user %}
+                                        <li><a href="{{ path('addblog') }}">Add Blog</a></li>
                                     {% endif %}
                                 </ul>
                             </li>
-
+                            <li><a href="{{ path('contact') }}">Contact</a></li>
+                            <li><a href="{{ path('location_homepage') }}">Location</a></li>
+                            {% if app.user %}
+                            <a href="{{ path('location_homepage') }}"> </a><li class="icon-shopping-basket2">My Orders</li>
+                            {% endif %}
+                            </li>
+                            </li>
                         </ul>
                     </nav>
                     <ul class="tm-header-utils">
@@ -110,7 +130,7 @@
                                 <button type="submit"><i class="ion-android-search"></i></button>
                             </form>
                         </li>
-                        <li><a href="cart.html"><i class="ion-android-cart"></i></a></li>
+                        <li><a href="{{ path('checkout')}}"><i class="ion-android-cart"></i><span style="padding-left: 5px">({{Count.orders}})</span></a></li>
                     </ul>
                     <div class="tm-mobilenav"></div>
                 </div>
@@ -120,9 +140,9 @@
     </div>
     <!--// Header -->
 
-{% block content%}
+    {% block content %}
 
- {% endblock %}
+    {% endblock %}
     <!--// Page Content -->
 
     <!-- Footer -->
@@ -135,8 +155,9 @@
                     <!-- Single Widget -->
                     <div class="col-lg-3 col-md-6 col-12">
                         <div class="single-widget widget-info">
-                            <a class="widget-info-logo" href="index.html"><img src="{{ asset('Front/') }}assets/images/logo-white.png"
-                                                                               alt="white logo"></a>
+                            <a class="widget-info-logo" href="index.html"><img
+                                        src="{{ asset('Front/') }}assets/images/logo-white.png"
+                                        alt="white logo"></a>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sagittis orci ac
                                 odio dictum tincidunt. Donec ut metus leo auctor id faucibus.</p>
                             <ul>
@@ -164,7 +185,7 @@
                                 </li>
                                 <li>
                                     <i class="ion-ios-location-outline"></i>
-                                    <p>2726 Avenue Papineau Montreal, QC, Canada</p>
+                                    <p>Esprit </p>
                                 </li>
                             </ul>
                         </div>
@@ -361,30 +382,6 @@
 
 <!-- Mirrored from thememarch.com/demo/html/malic/malic/login-register.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 26 Jan 2020 19:44:35 GMT -->
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 {#<!doctype html>#}

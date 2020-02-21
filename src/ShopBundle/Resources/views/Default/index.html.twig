@@ -47,9 +47,7 @@
                                     <div class="tm-product-topside">
                                         <img src="{{ asset('shopImg/' ~ p.imageId) }}" alt="product image">
                                         <ul class="tm-product-actions">
-                                            <li><a href="#"><i class="ion-android-cart"></i> Add to cart</a></li>
-                                            <li><a href="{{ path('shop_details',{id:p.id}) }}">
-                                                    <i class="ion-eye"></i></a></li>
+                                            <li><a href="{{ path('shop_details',{id:p.id}) }}"><i class="ion-android-cart"></i> Add to cart</a></li>
                                         </ul>
                                     </div>
                                     <div class="tm-product-bottomside">
