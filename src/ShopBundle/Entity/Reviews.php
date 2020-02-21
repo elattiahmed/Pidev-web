@@ -2,6 +2,7 @@
 
 namespace ShopBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -20,6 +21,17 @@ class Reviews
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="ShopBundle\Entity\Produit", cascade={"persist"}, mappedBy="review")
+     * @ORM\JoinTable(name="produit_review")
+     */
+    private $produit;
+
+    public function __construct()
+    {
+        $this->produit = new ArrayCollection();
+    }
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", cascade={"persist"})
@@ -53,6 +65,13 @@ class Reviews
      * @ORM\Column(name="description", type="string")
      */
     private $description;
+
+    /**
+     * @var datetime
+     *
+     * @ORM\Column(name="date", type="datetime")
+     */
+    private $date;
 
     /**
      * Get id.
@@ -142,6 +161,38 @@ class Reviews
     public function setDescription($description)
     {
         $this->description = $description;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getProduit()
+    {
+        return $this->produit;
+    }
+
+    /**
+     * @param ArrayCollection $produit
+     */
+    public function setProduit($produit)
+    {
+        $this->produit = $produit;
+    }
+
+    /**
+     * @return datetime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * @param datetime $date
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
     }
 
 

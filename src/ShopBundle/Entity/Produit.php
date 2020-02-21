@@ -2,6 +2,7 @@
 
 namespace ShopBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -36,6 +37,18 @@ class Produit
      * @ORM\Column(name="description", type="text")
      */
     private $description;
+
+
+    /**
+     * @ORM\ManyToMany(targetEntity="ShopBundle\Entity\Reviews", cascade={"persist"}, inversedBy="produit")
+     * @ORM\JoinTable(name="produit_review")
+     */
+    protected $review;
+
+    public function __construct()
+    {
+        $this->review = new ArrayCollection();
+    }
 
     /**
      * @var float
@@ -85,6 +98,8 @@ class Produit
      * @ORM\JoinColumn(name="category",referencedColumnName="id",onDelete="cascade")
      */
     private $category;
+
+
 
     /**
      * @ORM\ManyToOne(targetEntity="ShopBundle\Entity\Region")
@@ -287,6 +302,24 @@ class Produit
     {
         $this->region = $region;
     }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getReview()
+    {
+        return $this->review;
+    }
+
+    /**
+     * @param ArrayCollection $review
+     */
+    public function setReview($review)
+    {
+        $this->review = $review;
+    }
+
+
 
 
 

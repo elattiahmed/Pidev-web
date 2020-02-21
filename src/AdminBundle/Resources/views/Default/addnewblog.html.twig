@@ -1,0 +1,98 @@
+{% extends "AdminBundle:Default:layoutadmin.html.twig" %}
+{% block body %}
+    {#<h1>Blog creation</h1>#}
+
+    {#{{ form_start(form) }}#}
+    {#{{ form_widget(form) }}#}
+    {#<input type="submit" value="Create"/>#}
+    {#{{ form_end(form) }}#}
+
+    {#<ul>#}
+    {#    <li>#}
+    {#        <a href="{{ path('blog_new') }}">Back to the list</a>#}
+    {#    </li>#}
+    {#</ul>#}
+
+    <header class="blue accent-3 relative">
+        <div class="container-fluid text-white">
+            <div class="row p-t-b-10 ">
+                <div class="col">
+                    <h4>
+                        <i class="icon-package"></i>
+                        Form Elements
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </header>
+    <br>
+    <div class="row">
+        <div class="col-md-7">
+            <div class="card">
+                <div class="card-body b-b">
+                    <h4>Add blogs </h4>
+                    <!-- Input -->
+                    <div class="body">
+                        {{ form_start(form) }}
+                        <div class="row clearfix">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <h6>Title</h6>
+
+                                    <div class="form-line">
+                                        {{ form_widget(form.title) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <h6>Content</h6>
+
+                                    <div class="form-line">
+                                        {{ form_widget(form.content) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <h6>Categorie</h6>
+
+                                    <div class="form-line">
+                                        {{ form_widget(form.categorie) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <h6>Image</h6>
+
+                                    <div class="form-line">
+                                        {{ form_widget(form.imageFile) }}
+                                    </div>
+                                </div>
+
+                            </div>
+                            <button type="submit" class="btn btn-primary mt-2"><i class="icon-arrow_forward mr-2"></i>Submit
+                                blog
+                            </button>
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                    <!-- #END# Input -->
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <h3>Documentation</h3>
+            <hr>
+            <p>You can pass plugin options using data-options attribute. Please make sure to use valid json
+                code.</p>
+            <a href="https://alex-d.github.io/Trumbowyg/documentation/" target="_blank" class="btn btn-xs btn-primary">Plugin
+                Docs</a>
+            <a href="https://jsonformatter.org/" target="_blank" class="btn btn-outline-primary btn-xs">JSON
+                Formatter</a>
+            <h4 class="mt-5">Code Example</h4>
+            <hr>
+            <pre><code>&lt;textarea
+&nbsp;&nbsp;&nbsp;class="form-control editor"
+&nbsp;&nbsp;&nbsp;placeholder="Write Something..."
+&nbsp;&nbsp;&nbsp;data-options='{"btns":[["bold","italic"],["link"]]}'&gt;
+&lt;/textarea&gt;</code></pre>
+
+        </div>
+    </div>
+{% endblock %}

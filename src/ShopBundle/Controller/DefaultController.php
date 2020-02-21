@@ -5,6 +5,7 @@ namespace ShopBundle\Controller;
 use ShopBundle\Entity\Category;
 use ShopBundle\Entity\Produit;
 use ShopBundle\Entity\Region;
+use ShopBundle\Entity\Reviews;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -15,95 +16,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
-    public function addAction(Request $request)
-    {
-        $user = $this->container->get('security.token_storage')->getToken()->getUser();
-        $produit = new Produit();
-        $form = $this->createFormBuilder($produit)
-            ->add('nom', TextType::class, array('attr' => array('class' => 'form-control', 'style' => 'margin-bottom:15px')))
-            ->add('description', TextareaType::class, array('attr' => array('class' => 'form-control', 'style' => 'margin-bottom:15px')))
-            ->add('quantity', NumberType::class, array('attr' => array('class' => 'form-control', 'style' => 'margin-bottom:15px')))
-            ->add('prix', NumberType::class, array('attr' => array('class' => 'form-control', 'style' => 'margin-bottom:15px')))
-            ->add('imageId', FileType::class, array('attr' => array('class' => 'form-control', 'style' => 'margin-bottom:15px')))
-            ->add('category', EntityType::class, [
-                // looks for choices from this entity
-                'class' => Category::class,
-                'choice_label' => 'category',])
-            ->add('region', EntityType::class, [
-                // looks for choices from this entity
-                'class' => Region::class,
-                'choice_label' => 'region',])
-            ->getForm();
-
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            /** @var UploadedFile $file */
-            $file = $produit->getImageId();
-
-            $fileName = md5(uniqid()) . '.' . $file->guessExtension();
-
-            // Move the file to the directory where brochures are stored
-
-            $file->move(
-                $this->getParameter('images_shop'),
-                $fileName
-            );
-
-
-            $produit->setImageId($fileName);
-
-            $nom = $form['nom']->getData();
-            $description = $form['description']->getData();
-            $stock = $form['quantity']->getData();
-            $prix = $form['prix']->getData();
-            $cat = $form['category']->getData();
-            $reg = $form['region']->getData();
-            $now = new\DateTime('now');
-
-            $produit->setNom($nom);
-            $produit->setDescription($description);
-            $produit->setQuantity($stock);
-            $produit->setPrix($prix);
-            $produit->setUtilisateur($user);
-            $produit->setCategory($cat);
-            $produit->setRegion($reg);
-            $produit->setStars(0);
-            $produit->setDate($now);
-
-            $sn = $this->getDoctrine()->getManager();
-            $sn->persist($produit);
-            $sn->flush();
-
-            $this->addFlash(
-                'notice',
-                'todo added'
-            );
-
-        }
-
-        $panierlist = $this->getDoctrine()->getRepository('ShopBundle:Panier')->findByUser($user);
-        $cat = $this->getDoctrine()->getRepository('ShopBundle:Category')->findAll();
-        $region = $this->getDoctrine()->getRepository('ShopBundle:Region')->findAll();
-
-        $count = count($panierlist);
-        $total = 0;
-        foreach ($panierlist as $prix) {
-
-            $total = $total + $prix->getPrix();
-        }
-
-
-
-        return $this->render('ShopBundle:Default:add.html.twig', array(
-
-            'cat' => $cat,
-            'region' => $region,
-
-            'form' => $form->createView(),'nbrp' => $count, 'panier' => $panierlist, 'total' => $total
-
-        ));
-    }
 
     public function indexAction(Request $request)
     {
@@ -113,16 +25,103 @@ class DefaultController extends Controller
         $pagination = $paginator->paginate(
             $products,
             $request->query->getInt('page', 1)/*page number*/,
-            3/*limit per page*/
+            6/*limit per page*/
         );
         return $this->render('ShopBundle:Default:index.html.twig',['products' => $pagination]);
     }
-
-    public function detailsAction($id)
+    public function detailsAction(Request $request, $id)
     {
 
-        $product = $this->getDoctrine()->getRepository('ShopBundle:Produit')->find($id);
+        $produits = $this->getDoctrine()
+            ->getRepository('ShopBundle:Produit')
+            ->find($id);
 
-        return $this->render('ShopBundle:Default:details.html.twig',['product' => $product]);
+
+        if ($this->container->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            $user = $this->container->get('security.token_storage')->getToken()->getUser();
+
+
+        $reviews = $this->getDoctrine()->getRepository('ShopBundle:Reviews')->findByProduitP($produits);
+        $now = new\DateTime('now');
+        if ($request->isMethod('POST')) {
+
+            $listReviews = $produits->getReview();
+            $mawjoud = false;
+            foreach ($listReviews as $re)
+            {
+                if ($re->getUser() == $user){
+                    $mawjoud = true;
+                    $re->setTitle(($request->get('title')));
+                    $re->setDate($now);
+                    $re->setDescription(($request->get('description')));
+                    $re->setStars(($request->get('stars')));
+                    $re->setProduitP($produits);
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($re);
+                    $em->flush();
+                }
+            }
+
+            if ($mawjoud){
+
+                return $this->redirectToRoute("shop_details", array('id' => $produits->getId()));
+            }
+            else{
+                $review = new Reviews();
+                $review->setTitle(($request->get('title')));
+                $review->setDescription(($request->get('description')));
+                $review->setStars(($request->get('stars')));
+                $review->setProduitP($produits);
+                $review->setUser($user);
+                $review->setDate($now);
+                $produits->setReview([$review]);
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($review);
+                $em->persist($produits);
+                $em->flush();
+
+                return $this->redirectToRoute("shop_details", array('id' => $produits->getId()));
+            }
+
+
+
+        }
+
+        $panierlist = $this->getDoctrine()->getRepository('ShopBundle:Panier')->findByUser($user);
+        $last = $this->getDoctrine()->getRepository('ShopBundle:Produit')->findBy(array(), array('date' => 'DESC'), 3, 1);
+        $count = count($panierlist);
+        $nbrrev = count($reviews);
+        $total = 0;
+        foreach ($panierlist as $prix) {
+
+            $p = $prix->getPrix();
+            $total = $total + $p;
+        }
+        $totlanbrR = 0;
+        foreach ($reviews as $rating) {
+
+            $totlanbrR = $totlanbrR + $rating->getStars();
+        }
+        if ($nbrrev == 0) {
+            $res = 0;
+        } else
+            $res = $totlanbrR / $nbrrev;
+        $produits->setStars($res);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($produits);
+        $em->flush();
+        return $this->render('ShopBundle:Default:details.html.twig',['product' => $produits,
+        'nbrp' => $count, 'panier' => $panierlist,
+            'total' => $total,
+            'reviews' => $reviews,
+            'rev' => $nbrrev,
+            'rating' => $res,
+            'lastprod' => $last,
+        ]);
+        }
+        else{
+            return $this->redirectToRoute('fos_user_security_login');
+        }
     }
+
 }

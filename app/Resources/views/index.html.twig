@@ -83,6 +83,11 @@
                             {{ form_widget(form.email, { 'attr': {'class': 'form-control' } }) }}
                         </div>
                         <div class="tm-form-field">
+                            <label for="register-email">Profile Picture</label>
+                            {{ form_errors(form.imageId) }}
+                            {{ form_widget(form.imageId, { 'attr': {'class': 'form-control' } }) }}
+                        </div>
+                        <div class="tm-form-field">
                             <label for="register-password">Password</label>
                             {{ form_errors(form.plainPassword.first) }}
                             {{ form_widget(form.plainPassword.first, { 'attr': {'class': 'form-control' ,'min':'8' } }) }}

@@ -4,3 +4,18 @@ blog_homepage:
 blog_show:
     path:     /Details/{id}
     defaults: { _controller: BlogBundle:Default:show }
+recherche_blog:
+    path:     /searchblog
+    defaults: { _controller: BlogBundle:Default:RechercheBlog }
+ByCategorie:
+    path:     /categorie/{cat}
+    defaults: { _controller: BlogBundle:Default:ByCategorie }
+like_blog:
+    path:     /like/{id}
+    defaults: { _controller: BlogBundle:Default:likeBlog }
+dislikeblog:
+    path:     /dislikeblog/{id}
+    defaults: { _controller: BlogBundle:Default:dislikeblog }
+addblog:
+    path:     /addblog/
+    defaults: { _controller: BlogBundle:Default:new }

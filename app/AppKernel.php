@@ -24,7 +24,9 @@ class AppKernel extends Kernel
             new BlogBundle\BlogBundle(),
             new Vich\UploaderBundle\VichUploaderBundle(),
             new FOS\CKEditorBundle\FOSCKEditorBundle(),
-
+            new Nomaya\SocialBundle\NomayaSocialBundle(),
+            new ContacusBundle\ContacusBundle(),
+            new LocationBundle\LocationBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

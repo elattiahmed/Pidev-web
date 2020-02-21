@@ -1,6 +1,7 @@
 {% extends "base.html.twig" %}
 
 {% block content %}
+
 <!-- Breadcrumb Area -->
 <div class="tm-breadcrumb-area tm-padding-section bg-grey" data-bgimage="{{ asset('front/') }}assets/images/breadcrumb-bg.jpg"
      data-white-overlay="2">
@@ -29,39 +30,39 @@
                 <div class="col-lg-8">
                     <div class="tm-contact">
                         <h2>Send us a message</h2>
+                        {{ form_start(form) }}
                         <form id="tm-contactform" action="http://thememarch.com/demo/html/malic/malic/assets/php/mailer.php"
                               class="tm-contact-forminner tm-form" method="POST">
+
                             <div class="tm-form-inner">
                                 <div class="tm-form-field tm-form-fieldhalf">
                                     <label for="contact-form-name">Name</label>
-                                    <input type="text" id="contact-form-name" placeholder="Your name here"
-                                           name="name" required>
+                                    {{form_widget(form.name)}}
                                 </div>
                                 <div class="tm-form-field tm-form-fieldhalf">
                                     <label for="contact-form-email">Email</label>
-                                    <input type="email" id="contact-form-email"
-                                           placeholder="malicfishing@gmail.com" name="email" required>
+                                    {{form_widget(form.email)}}
                                 </div>
                                 <div class="tm-form-field tm-form-fieldhalf">
                                     <label for="contact-form-phone">Phone</label>
-                                    <input type="text" id="contact-form-phone"
-                                           placeholder="Your phone number here" name="phone" required>
+                                    {{form_widget(form.phone)}}
                                 </div>
                                 <div class="tm-form-field tm-form-fieldhalf">
                                     <label for="contact-form-subject">Subject</label>
-                                    <input type="text" id="contact-form-subject" placeholder="Your subjert"
-                                           name="subject">
+                                    {{form_widget(form.subject)}}
                                 </div>
                                 <div class="tm-form-field">
                                     <label for="contact-form-message">Message</label>
-                                    <textarea cols="30" rows="5" id="contact-form-message"
-                                              placeholder="Write your message" name="message"></textarea>
+                                    {{form_widget(form.message|raw)}}
                                 </div>
                                 <div class="tm-form-field">
+
                                     <button type="submit" class="tm-button tm-button-block">Send
                                         Message</button>
+
                                 </div>
                             </div>
+                            {{ form_end(form) }}
                         </form>
                         <p class="form-messages"></p>
                     </div>

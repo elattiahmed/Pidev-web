@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Malic - Fishing & Hunting Club HTML Template</title>
+    <title>HuntKingdom - Fishing & Hunting Club HTML Template</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="apple-touch-icon" href="{{ asset('Front/') }}assets/images/favicon.png">
@@ -16,25 +16,27 @@
     <!-- inject:css -->
     <link rel="stylesheet" href="{{ asset('Front/') }}assets/css/vendors/plugins.min.css">
     <link rel="stylesheet" href="{{ asset('Front/') }}assets/css/style.css">
+    {#    <script src="{{ asset('Front/') }}jquery-3.3.1.min.js"></script>#}
+
     <!-- endinject -->
 </head>
 
 <body>
 
 <!-- Preloader -->
-<div class="tm-preloader">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-6">
-                <div class="tm-preloader-logo">
-                    <img src="{{ asset('Front/') }}assets/images/logo-white.png" alt="logo">
-                </div>
-                <span class="tm-preloader-progress"></span>
-            </div>
-        </div>
-    </div>
-    <button class="tm-button tm-button-small">Cancel Preloader</button>
-</div>
+{#<div class="tm-preloader">#}
+{#    <div class="container">#}
+{#        <div class="row justify-content-center">#}
+{#            <div class="col-lg-6">#}
+{#                <div class="tm-preloader-logo">#}
+{#                    <img src="{{ asset('Front/') }}assets/images/logo-white.png" alt="logo">#}
+{#                </div>#}
+{#                <span class="tm-preloader-progress"></span>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#    <button class="tm-button tm-button-small">Cancel Preloader</button>#}
+{#</div>#}
 <!--// Preloader -->
 
 <!-- Wrapper -->
@@ -48,22 +50,40 @@
                 <div class="row align-items-center">
                     <div class="col-lg-8 col-12">
                         <ul class="tm-header-info">
-                            <li>FREE shipping over $50 </li>
-                            <li><a href="tel:18883456789"><i class="ion-ios-telephone"></i>1-888-345-6789</a></li>
-                            <li><a href="mailto:contact@example.com"><i
-                                            class="ion-android-mail"></i>contact@example.com</a></li>
+                            <li><a href="tel:58800900"><i class="ion-ios-telephone"></i>58800900</a></li>
+                            <li><a href="mailto:contact@huntkingdom.tn"><i
+                                            class="ion-android-mail"></i>contact@huntkingdom.tn</a></li>
                         </ul>
                     </div>
                     <div class="col-lg-4 col-12">
                         <ul class="tm-header-icons">
                             {% if app.user %}
-                                <li><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>
+                                <li>
+
+                                    <div class="dropdown-menu-left">
+                                        <button class="btn btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                                            <img src="{{ asset('usersPictures/' ~ app.user.imageId) }}" style="border-radius: 50%" alt="dropdown image" class="img-responsive"  width="35" height="35">
+                                            <span class="caret"> {{ app.user.username }}</span>
+                                        </button>
+                                        <ul class="dropdown-menu fa-user" >
+                                            <li ><a style="color: #0b0b0b" href="{{ path('fos_user_security_logout') }}">Log Out</a></li>
+                                            {% if is_granted('ROLE_ADMIN') %}
+                                            <li ><a style="color: #0b0b0b" href="{{ path('admin_homepage') }}">Panel Admin</a></li>
+                                            {% else %}
+
+                                            <li ><a style="color: #0b0b0b" href="{{ path('fos_user_profile_edit') }}">Edit Profile</a></li>
+                                                <li ><a style="color: #0b0b0b" href="{{ path('fos_user_change_password') }}">Edit Password</a></li>
+                                            {% endif %}
+                                        </ul>
+                                    </div>
+                                </li>
 
                             {% else %}
                                 <li><a href="{{ path('fos_user_security_login') }}">Log In / Register</a></li>
                             {% endif %}
                         </ul>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -71,38 +91,35 @@
         <div class="tm-header-bottomarea">
             <div class="container">
                 <div class="tm-header-inner">
-                    <a href="index.html" class="tm-header-logo">
+                    <a href="{{ path('homepage') }}" class="tm-header-logo">
                         <img src="{{ asset('Front/') }}assets/images/logo.png" alt="malic">
                     </a>
                     <nav class="tm-header-nav">
                         <ul>
-                            <li><a href="{{path('homepage')}}">Home</a></li>
-                            <li><a href="about.html">About</a></li>
-                            <li><a href="services.html">Service</a></li>
+                            <li><a href="{{ path('homepage') }}">Home</a></li>
+                            <li><a href="{{ path('homepage') }}">Evenment</a></li>
                             <li class="tm-header-nav-dropdown"><a href="#">Shop</a>
                                 <ul>
-                                    <li><a href="{{path('shop_homepage')}}">Our Products</a></li>
+                                    <li><a href="{{ path('shop_homepage') }}">Our Products</a></li>
                                     {% if app.user %}
-                                    <li><a href="{{path('shop_add')}}">Add Product</a></li>
-                                    <li><a href="portfolios.html">My Products</a></li>
                                     {% endif %}
                                 </ul>
                             </li>
-                            <li class="tm-header-nav-dropdown"><a href="blog.html">Blog</a>
+                            <li class="tm-header-nav-dropdown"><a href="#">Blog</a>
                                 <ul>
-                                    <li><a href="blog.html">Blog</a></li>
-                                    <li><a href="blog-2.html">Blog Style 2</a></li>
-                                    <li><a href="blog-leftsidebar.html">Blog Left Sidebar</a></li>
-                                    <li><a href="blog-nosidebar.html">Blog Without Sidebar</a></li>
-                                    <li><a href="blog-details.html">Blog Details</a></li>
-                                    <li><a href="blog-details-leftsidebar.html">Blog Details Left Sidebar</a></li>
-                                    <li><a href="blog-details-nosidebar.html">Blog Details Without Sidebar</a></li>
-                                    <li><a href="blog-details-gallery.html">Blog Details Gallery</a></li>
-                                    <li><a href="blog-details-audio.html">Blog Details Audio</a></li>
-                                    <li><a href="blog-details-video.html">Blog Details Video</a></li>
+                                    <li><a href="{{ path('blog_homepage') }}">Our Blog</a></li>
+                                    {% if app.user %}
+                                        <li><a href="{{ path('addblog') }}">Add Blog</a></li>
+                                    {% endif %}
                                 </ul>
                             </li>
-                            <li><a href="{{path('contact')}}">Contact</a></li>
+                            <li><a href="{{ path('contact') }}">Contact</a></li>
+                            <li><a href="{{ path('location_homepage') }}">Location</a></li>
+                            {% if app.user %}
+                            <a href="{{ path('location_homepage') }}"> </a><li class="icon-shopping-basket2">My Orders</li>
+                            {% endif %}
+                            </li>
+                            </li>
                         </ul>
                     </nav>
                     <ul class="tm-header-utils">
@@ -113,7 +130,7 @@
                                 <button type="submit"><i class="ion-android-search"></i></button>
                             </form>
                         </li>
-                        <li><a href="cart.html"><i class="ion-android-cart"></i></a></li>
+                        <li><a href="{{ path('checkout')}}"><i class="ion-android-cart"></i><span style="padding-left: 5px">({{Count.orders}})</span></a></li>
                     </ul>
                     <div class="tm-mobilenav"></div>
                 </div>
@@ -123,9 +140,9 @@
     </div>
     <!--// Header -->
 
-{% block content%}
+    {% block content %}
 
- {% endblock %}
+    {% endblock %}
     <!--// Page Content -->
 
     <!-- Footer -->
@@ -138,15 +155,14 @@
                     <!-- Single Widget -->
                     <div class="col-lg-3 col-md-6 col-12">
                         <div class="single-widget widget-info">
-                            <a class="widget-info-logo" href="index.html"><img src="assets/images/logo-white.png"
-                                                                               alt="white logo"></a>
+                            <a class="widget-info-logo" href="index.html"><img
+                                        src="{{ asset('Front/') }}assets/images/logo-white.png"
+                                        alt="white logo"></a>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sagittis orci ac
                                 odio dictum tincidunt. Donec ut metus leo auctor id faucibus.</p>
                             <ul>
-                                <li><a href="#"><i class="ion-social-facebook"></i></a></li>
-                                <li><a href="#"><i class="ion-social-instagram-outline"></i></a></li>
-                                <li><a href="#"><i class="ion-social-skype-outline"></i></a></li>
-                                <li><a href="#"><i class="ion-social-pinterest-outline"></i></a></li>
+                                "{{ socialButtons() }}"
+
                             </ul>
                         </div>
                     </div>
@@ -169,7 +185,7 @@
                                 </li>
                                 <li>
                                     <i class="ion-ios-location-outline"></i>
-                                    <p>2726 Avenue Papineau Montreal, QC, Canada</p>
+                                    <p>Esprit </p>
                                 </li>
                             </ul>
                         </div>
@@ -215,12 +231,12 @@
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-md-7">
-                        <p class="tm-footer-copyright">Powered By <a href="https://thememarch.com/">ThemeMarch</a> ©
-                            2019</p>
+                        <p class="tm-footer-copyright">Powered By <a href="https://thememarch.com/">Challngers</a> ©
+                            2020</p>
                     </div>
                     <div class="col-md-5">
                         <div class="tm-footer-payment">
-                            <img src="assets/images/payment-methods.png" alt="payment methods">
+                            <img src="{{ asset('Front/') }}assets/images/payment-methods.png" alt="payment methods">
                         </div>
                     </div>
                 </div>
@@ -242,53 +258,53 @@
                                     <div class="tm-prodetails-images">
                                         <div class="tm-prodetails-largeimages">
                                             <div class="tm-prodetails-largeimage">
-                                                <img src="assets/images/products/product-image-1.jpg"
+                                                <img src="{{ asset('Front/') }}assets/images/products/product-image-1.jpg"
                                                      alt="product image">
                                             </div>
                                             <div class="tm-prodetails-largeimage">
-                                                <img src="assets/images/products/product-image-2.jpg"
+                                                <img src="{{ asset('Front/') }}assets/images/products/product-image-2.jpg"
                                                      alt="product image">
                                             </div>
                                             <div class="tm-prodetails-largeimage">
-                                                <img src="assets/images/products/product-image-3.jpg"
+                                                <img src="{{ asset('Front/') }}assets/images/products/product-image-3.jpg"
                                                      alt="product image">
                                             </div>
                                             <div class="tm-prodetails-largeimage">
-                                                <img src="assets/images/products/product-image-1.jpg"
+                                                <img src="{{ asset('Front/') }}assets/images/products/product-image-1.jpg"
                                                      alt="product image">
                                             </div>
                                             <div class="tm-prodetails-largeimage">
-                                                <img src="assets/images/products/product-image-2.jpg"
+                                                <img src="{{ asset('Front/') }}assets/images/products/product-image-2.jpg"
                                                      alt="product image">
                                             </div>
                                             <div class="tm-prodetails-largeimage">
-                                                <img src="assets/images/products/product-image-3.jpg"
+                                                <img src="{{ asset('Front/') }}assets/images/products/product-image-3.jpg"
                                                      alt="product image">
                                             </div>
                                         </div>
                                         <div class="tm-prodetails-thumbnails">
                                             <div class="tm-prodetails-thumbnail">
-                                                <img src="assets/images/products/product-image-thumb-1.jpg"
+                                                <img src="{{ asset('Front/') }}assets/images/products/product-image-thumb-1.jpg"
                                                      alt="product image">
                                             </div>
                                             <div class="tm-prodetails-thumbnail">
-                                                <img src="assets/images/products/product-image-thumb-2.jpg"
+                                                <img src="{{ asset('Front/') }}assets/images/products/product-image-thumb-2.jpg"
                                                      alt="product image">
                                             </div>
                                             <div class="tm-prodetails-thumbnail">
-                                                <img src="assets/images/products/product-image-thumb-3.jpg"
+                                                <img src="{{ asset('Front/') }}assets/images/products/product-image-thumb-3.jpg"
                                                      alt="product image">
                                             </div>
                                             <div class="tm-prodetails-thumbnail">
-                                                <img src="assets/images/products/product-image-thumb-1.jpg"
+                                                <img src="{{ asset('Front/') }}assets/images/products/product-image-thumb-1.jpg"
                                                      alt="product image">
                                             </div>
                                             <div class="tm-prodetails-thumbnail">
-                                                <img src="assets/images/products/product-image-thumb-2.jpg"
+                                                <img src="{{ asset('Front/') }}assets/images/products/product-image-thumb-2.jpg"
                                                      alt="product image">
                                             </div>
                                             <div class="tm-prodetails-thumbnail">
-                                                <img src="assets/images/products/product-image-thumb-3.jpg"
+                                                <img src="{{ asset('Front/') }}assets/images/products/product-image-thumb-3.jpg"
                                                      alt="product image">
                                             </div>
                                         </div>
@@ -332,12 +348,7 @@
                                         <div class="tm-prodetails-share">
                                             <h6>Share :</h6>
                                             <ul>
-                                                <li><a href="#"><i class="ion-social-facebook"></i></a></li>
-                                                <li><a href="#"><i class="ion-social-instagram-outline"></i></a>
-                                                </li>
-                                                <li><a href="#"><i class="ion-social-skype-outline"></i></a></li>
-                                                <li><a href="#"><i class="ion-social-pinterest-outline"></i></a>
-                                                </li>
+                                                <li>"{{ socialButtons() }}"</i></a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -371,30 +382,6 @@
 
 <!-- Mirrored from thememarch.com/demo/html/malic/malic/login-register.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 26 Jan 2020 19:44:35 GMT -->
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 {#<!doctype html>#}

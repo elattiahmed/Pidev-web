@@ -26,6 +26,31 @@ class Blog
     private $id;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="accept", type="boolean")
+     */
+    private $accept;
+
+    /**
+     * @return bool
+     */
+    public function isAccept()
+    {
+        return $this->accept;
+    }
+
+    /**
+     * @param bool $accept
+     */
+    public function setAccept($accept)
+    {
+        $this->accept = $accept;
+    }
+
+
+
+    /**
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
