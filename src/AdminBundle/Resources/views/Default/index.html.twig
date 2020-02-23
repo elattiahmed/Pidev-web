@@ -1,0 +1,275 @@
+{% extends "AdminBundle:Default:layoutadmin.html.twig" %}
+{% block body %}
+    <div class="container-fluid relative animatedParent animateOnce p-lg-5">
+        <div class="row row-eq-height my-3">
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-3 col-sm-6">
+                        <div class="card no-b mb-3">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div><i class="icon-timer s-18"></i></div>
+                                    <div><span class="badge badge-pill badge-primary">4:30</span></div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="s-48 my-3 font-weight-lighter">{{ Count.alllocation }}</div>
+                                    Total Location
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="card no-b mb-3">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div><i class="icon-user-circle-o s-18"></i></div>
+                                    <div><span class="badge badge-pill badge-danger">4:30</span></div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="s-48 my-3 font-weight-lighter">{{ Count.allusers }}</div>
+                                     Users
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="card no-b mb-3">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div><i class="icon-package s-18"></i></div>
+                                    <div><span class="text-success">40+35</span></div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="s-48 my-3 font-weight-lighter">{{ Count.nbrProducts }}</div>
+                                    All Products
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="card no-b mb-3">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div><i class="icon-user-times s-18"></i></div>
+                                    <div><span class="text-danger">50</span></div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="s-48 my-3 font-weight-lighter">95</div>
+                                    Returning Users
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+            <div class="col-md-4">
+                <div class="card no-b p-2"><div class="card-body">
+                        <div class="card-body">
+                            <div style="height: 300px"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+                                <canvas data-chart="chartJs" data-chart-type="doughnut" data-dataset="[
+                                                        [75, 25,25],
+
+                                                    ]" data-labels="[['user'],['Database'],['Disk2'],['Database2']]" data-dataset-options="[
+                                                    {
+                                                        label: 'Disk',
+                                                        backgroundColor: [
+                                                            '#03a9f4',
+                                                            '#8f5caf',
+                                                            '#3f51b5'
+                                                        ],
+
+                                                    },
+
+
+                                                    ]" data-options="{legend: {display: !0,position: 'bottom',labels: {fontColor: '#7F8FA4',usePointStyle: !0}},
+                                }" width="123" height="375" class="chartjs-render-monitor js-chart-drawn" style="display: block; height: 300px; width: 99px;">
+                                </canvas>
+                            </div>
+                        </div>
+                    </div></div>
+            </div>
+
+        </div>
+
+        <div class="card-deck my-3 pt-3">
+            <div class="card b-0">
+                <div class="card-body p-5"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+                    <canvas id="shadowChart" style="height: 89px; display: block; width: 178px;" width="222" height="111" class="chartjs-render-monitor"></canvas>
+                    <script>
+                        $(function(){
+                            'use strict';
+                            let draw = Chart.controllers.line.prototype.draw;
+                            Chart.controllers.line = Chart.controllers.line.extend({
+                                draw: function() {
+                                    draw.apply(this, arguments);
+                                    let ctx = this.chart.chart.ctx;
+                                    let _stroke = ctx.stroke;
+                                    ctx.stroke = function() {
+                                        ctx.save();
+                                        ctx.shadowColor = '#3f51b5';
+                                        ctx.shadowBlur = 10;
+                                        ctx.shadowOffsetX = 0;
+                                        ctx.shadowOffsetY = 4;
+                                        _stroke.apply(this, arguments)
+                                        ctx.restore();
+                                    }
+                                }
+                            });
+
+                            let ctx = document.getElementById("shadowChart").getContext('2d');
+                            let myChart = new Chart(ctx, {
+                                type: 'line',
+                                data: {
+                                    labels: ["January", "February", "March", "April", "May", "June", "July"],
+                                    datasets: [{
+                                        label: "Months",
+                                        data: [65, 59, 80, 81, 56, 55, 40],
+                                        borderColor: '#03a9f4',
+                                        pointBackgroundColor: "#fff",
+                                        pointBorderColor: "#03a9f4",
+                                        pointHoverBackgroundColor: "#03a9f4",
+                                        pointHoverBorderColor: "#fff",
+                                        pointRadius: 4,
+                                        pointHoverRadius: 4,
+                                        fill: false
+                                    }]
+                                },
+                                options:{
+                                    legend: {
+                                        display: !0,
+                                        labels: {
+                                            fontColor: '#7F8FA4',
+                                            boxRadius: 4,
+                                            usePointStyle: !0
+                                        }
+                                    },
+                                    layout: {
+                                        padding: {
+                                            left: 0,
+                                            right: 0,
+                                            top: 0,
+                                            bottom: 0
+                                        }
+                                    },
+                                    scales: {
+                                        xAxes: [{
+                                            display: !0,
+                                            ticks: {
+                                                fontSize: '11',
+                                                fontColor: '#969da5'
+                                            },
+                                            gridLines: {
+                                                display: false,
+                                                zeroLineColor: 'rgba(255,255,255,0.1)',
+                                                color: 'rgba(255,255,255,0.1)',
+                                            }
+                                        }],
+                                        yAxes: [{
+                                            display: !0,
+                                            gridLines: {
+                                                display: false,
+                                                zeroLineColor: 'rgba(255,255,255,0.1)',
+                                                color: 'rgba(255,255,255,0.1)',
+                                            },
+                                            ticks: {
+                                                beginAtZero: !0,
+                                                max: 100,
+                                                stepSize: 25,
+                                                fontSize: '11',
+                                                fontColor: '#969da5'
+                                            }
+                                        }]
+                                    }
+                                }
+                            });
+                        });
+                    </script>
+                </div>
+            </div>
+            <div class="card no-b">
+                <div class="card-body">
+                    <table class="table table-hover earning-box">
+                        <tbody>
+                        <tr class="no-b">
+                            <td class="w-10">
+                                <a href="panel-page-profile.html" class="avatar avatar-lg">
+                                    <img src="assets/img/dummy/u6.png" alt="">
+                                </a>
+                            </td>
+                            <td>
+                                <h6>Sara Kamzoon</h6>
+                                <small class="text-muted">Marketing Manager</small>
+                            </td>
+                            <td>25</td>
+                            <td>$250</td>
+                        </tr>
+                        <tr>
+                            <td class="w-10">
+                                <a href="panel-page-profile.html" class="avatar avatar-lg">
+                                    <img src="assets/img/dummy/u7.png" alt="">
+                                </a>
+                            </td>
+                            <td>
+                                <h6>Sara Kamzoon</h6>
+                                <small class="text-muted">Marketing Manager</small>
+                            </td>
+                            <td>25</td>
+                            <td>$250</td>
+                        </tr>
+                        <tr>
+                            <td class="w-10">
+                                <a href="panel-page-profile.html" class="avatar avatar-lg">
+                                    <img src="assets/img/dummy/u9.png" alt="">
+                                </a>
+                            </td>
+                            <td>
+                                <h6>Sara Kamzoon</h6>
+                                <small class="text-muted">Marketing Manager</small>
+                            </td>
+                            <td>25</td>
+                            <td>$250</td>
+                        </tr>
+                        <tr>
+                            <td class="w-10">
+                                <a href="panel-page-profile.html" class="avatar avatar-lg">
+                                    <img src="assets/img/dummy/u11.png" alt="">
+                                </a>
+                            </td>
+                            <td>
+                                <h6>Sara Kamzoon</h6>
+                                <small class="text-muted">Marketing Manager</small>
+                            </td>
+                            <td>25</td>
+                            <td>$250</td>
+                        </tr>
+                        <tr>
+                            <td class="w-10">
+                                <a href="panel-page-profile.html" class="avatar avatar-lg">
+                                    <img src="assets/img/dummy/u12.png" alt="">
+                                </a>
+                            </td>
+                            <td>
+                                <h6>Sara Kamzoon</h6>
+                                <small class="text-muted">Marketing Manager</small>
+                            </td>
+                            <td>25</td>
+                            <td>$250</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+{% endblock %}
